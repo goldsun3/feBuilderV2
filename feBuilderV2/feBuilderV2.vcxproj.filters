@@ -86,13 +86,13 @@
     <ClInclude Include="DropDownTemplate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DropDownWeaponType.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="WeaponType.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="WeaponTypeList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DropDownWeaponTypes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

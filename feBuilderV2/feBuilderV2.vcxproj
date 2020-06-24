@@ -154,7 +154,7 @@
     <ClInclude Include="Class.h" />
     <ClInclude Include="ClassList.h" />
     <ClInclude Include="DropDownTemplate.h" />
-    <ClInclude Include="DropDownWeaponType.h" />
+    <ClInclude Include="DropDownWeaponTypes.h" />
     <ClInclude Include="ListBoxCharNames.h" />
     <ClInclude Include="ListBoxClasses.h" />
     <ClInclude Include="ListBoxTemplate.h" />

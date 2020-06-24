@@ -25,6 +25,6 @@
 #include "ListBoxCharNames.h"
 #include "ListBoxClasses.h"
 #include "ListBoxWeapons.h"
-#include "DropDownWeaponType.h"
+#include "DropDownWeaponTypes.h"
 #include "ButtonClassBaseStats.h"
 #include "ButtonClassBoostedStats.h"

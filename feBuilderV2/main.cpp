@@ -17,7 +17,7 @@ void UpdateStats(HWND listviewstats, Stats* stats);
 void UpdateStats(HWND listviewstats, Stats* charstats, Stats* classstats, std::vector<statMeasure>* ledger);
 void UpdateStats(HWND listviewweaponstats, WeaponStats* weaponstats);
 bool CompareStats(std::wstring chartext, std::wstring classtext);
-void UpdateWeaponTypes(HWND listboxweapons, std::vector<WeaponType>* weapontypelist);
+void UpdateWeaponTypes(HWND listboxweapons, HWND dropdownweapontypes, WeaponTypeList weapontypelist);
 
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
@@ -26,7 +26,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 	std::unique_ptr<Stats> charstats(new Stats);
 	std::unique_ptr<Stats> classstats(new Stats);
 	std::unique_ptr<WeaponStats> weaponstats(new WeaponStats);
-	std::unique_ptr<std::vector<WeaponType>> weapontypelist (new std::vector<WeaponType>);
+	//std::unique_ptr<std::vector<WeaponType>> weapontypelist (new std::vector<WeaponType>);
 	static std::unique_ptr<std::vector<statMeasure>> ledger (new std::vector<statMeasure>);
 	switch (msg) {
 
@@ -57,9 +57,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 
 			WeaponTypeList weapontypelist;
 
-			DropDownWeaponType dropdownweapontype;
-			dropdownweapontype.Construct(hwnd);
-			dropdownweapontype.SetWeaponTypes(weapontypelist);
+			DropDownWeaponTypes dropdownweapontypes;
+			dropdownweapontypes.Construct(hwnd);
+			dropdownweapontypes.SetWeaponTypes(weapontypelist);
 
 			ListViewStats listviewstats;
 			listviewstats.Construct(hwnd);
@@ -139,8 +139,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 					switch (HIWORD(wParam)) {
 						case CBN_SELCHANGE: {
 							if (ListBox_GetCurSel(GetDlgItem(hwnd, IDC_MAIN_LBW)) != LB_ERR) {
+								WeaponTypeList weapontypelist;
 								HWND listboxweapons = GetDlgItem(hwnd, IDC_MAIN_LBW);
-								UpdateWeaponTypes(listboxweapons, weapontypelist.get());
+								HWND dropdownweapontypes = GetDlgItem(hwnd, IDC_MAIN_DDWT);
+
+								UpdateWeaponTypes(listboxweapons, dropdownweapontypes, weapontypelist);
 							}
 
 							break;
@@ -293,7 +296,6 @@ void UpdateStats(HWND listviewstats, Stats* stats) {
 		ListView_SetItemText(listviewstats, 0, col, finalbuffer);
 	}
 }
-
 void UpdateStats(HWND listviewstats, Stats* charstats, Stats* classstats, std::vector<statMeasure>* ledger) {
 	if (classstats->getBoolState() == true) {
 		LVITEM itemTemp;
@@ -396,7 +398,6 @@ void UpdateStats(HWND listviewweaponstats, WeaponStats* weaponstats) {
 		ListView_SetItemText(listviewweaponstats, 0, col, finalbuffer);
 	}
 }
-
 bool CompareStats(std::wstring chartext, std::wstring classtext) {
 	int string1 = std::stoi(chartext);
 	int string2 = std::stoi(classtext);
@@ -406,13 +407,15 @@ bool CompareStats(std::wstring chartext, std::wstring classtext) {
 	return false;
 }
 
-void UpdateWeaponTypes(HWND listboxweapons, std::vector <WeaponType>* weapontypelist){
-	int len = ListBox_GetTextLen(listboxweapons, ListBox_GetCurSel(listboxweapons));
-	const wchar_t* buffer = new const wchar_t[len];
-	ListBox_GetText(listboxweapons, ListBox_GetCurSel(listboxweapons), buffer);
+void UpdateWeaponTypes(HWND listboxweapons, HWND dropdownweapontypes, WeaponTypeList weapontypelist){
 
-	for (int index = 0; index < weapontypelist->size(); index++) {
-		if (weapontypelist->at(index).getWeaponType().compare(buffer) != 0) {
+	const wchar_t* buffer = new const wchar_t[ComboBox_GetLBTextLen(dropdownweapontypes, ComboBox_GetCurSel(dropdownweapontypes))];
+	ComboBox_GetLBText(dropdownweapontypes, ComboBox_GetCurSel(dropdownweapontypes), buffer);
+
+	for (int index = 0; index < weapontypelist.getWeaponTypeCount(); index++) {
+		std::wstring weaponname = weapontypelist.extractWeaponType(index).getWeaponType();
+
+		if (weaponname.compare(buffer) != 0) {
 			ListBox_DeleteString(listboxweapons, index);
 		}
 	}

@@ -1,6 +1,6 @@
 #ifndef DROPDOWNWEAPONTYPE_H
 #define DROPDOWNWEAPONTYPE_H
-class DropDownWeaponType : DropDownTemplate
+class DropDownWeaponTypes : DropDownTemplate
 {
 protected:
 public:
