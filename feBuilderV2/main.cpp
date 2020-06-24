@@ -17,6 +17,7 @@ void UpdateStats(HWND listviewstats, Stats* stats);
 void UpdateStats(HWND listviewstats, Stats* charstats, Stats* classstats, std::vector<statMeasure>* ledger);
 void UpdateStats(HWND listviewweaponstats, WeaponStats* weaponstats);
 bool CompareStats(std::wstring chartext, std::wstring classtext);
+void UpdateWeaponTypes(HWND listboxweapons, std::vector<WeaponType>* weapontypelist);
 
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
@@ -25,155 +26,191 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 	std::unique_ptr<Stats> charstats(new Stats);
 	std::unique_ptr<Stats> classstats(new Stats);
 	std::unique_ptr<WeaponStats> weaponstats(new WeaponStats);
-	static std::unique_ptr<std::vector<statMeasure>> ledger(new std::vector<statMeasure>);
+	std::unique_ptr<std::vector<WeaponType>> weapontypelist (new std::vector<WeaponType>);
+	static std::unique_ptr<std::vector<statMeasure>> ledger (new std::vector<statMeasure>);
 	switch (msg) {
 
-	case WM_CREATE: {
-		Roster roster;
+		case WM_CREATE: {
+			Roster roster;
 
-		ListBoxCharNames listboxcharnames;
-		listboxcharnames.Construct(hwnd);
-		listboxcharnames.SetRoster(roster, hwnd);
+			ListBoxCharNames listboxcharnames;
+			listboxcharnames.Construct(hwnd);
+			listboxcharnames.SetRoster(roster, hwnd);
 
-		ClassList classlist;
+			ClassList classlist;
 
-		ListBoxClasses listboxclasses;
-		listboxclasses.Construct(hwnd);
-		listboxclasses.SetClassList(classlist);
+			ListBoxClasses listboxclasses;
+			listboxclasses.Construct(hwnd);
+			listboxclasses.SetClassList(classlist);
 
-		WeaponList weaponlist;
+			WeaponList weaponlist;
 
-		ListBoxWeapons listboxweapons;
-		listboxweapons.Construct(hwnd);
-		listboxweapons.SetWeaponList(weaponlist);
+			ListBoxWeapons listboxweapons;
+			listboxweapons.Construct(hwnd);
+			listboxweapons.SetWeaponList(weaponlist);
 
-		ButtonClassBaseStats bcbas;
-		bcbas.Construct(hwnd);
+			ButtonClassBaseStats bcbas;
+			bcbas.Construct(hwnd);
 
-		ButtonClassBoostedStats bcbos;
-		bcbos.Construct(hwnd);
+			ButtonClassBoostedStats bcbos;
+			bcbos.Construct(hwnd);
 
-		ListViewStats listviewstats;
-		listviewstats.Construct(hwnd);
-		listviewstats.SetColumns(hwnd);
-		listviewstats.SetColumnSpacing();
+			WeaponTypeList weapontypelist;
 
-		ListViewWeaponStats listviewweaponstats;
-		listviewweaponstats.Construct(hwnd);
-		listviewweaponstats.SetColumns(hwnd);
-		listviewweaponstats.SetColumnSpacing();
-		break;
-	}
+			DropDownWeaponType dropdownweapontype;
+			dropdownweapontype.Construct(hwnd);
+			dropdownweapontype.SetWeaponTypes(weapontypelist);
 
-	case WM_COMMAND: {
-		ledger->clear();
-		switch (HIWORD(wParam)) {
-		case LBN_SETFOCUS: {
+			ListViewStats listviewstats;
+			listviewstats.Construct(hwnd);
+			listviewstats.SetColumns(hwnd);
+			listviewstats.SetColumnSpacing();
+
+			ListViewWeaponStats listviewweaponstats;
+			listviewweaponstats.Construct(hwnd);
+			listviewweaponstats.SetColumns(hwnd);
+			listviewweaponstats.SetColumnSpacing();
 			break;
 		}
 
-		case LBN_SELCHANGE: {
+		case WM_COMMAND: {
+			ledger->clear();
 			switch (LOWORD(wParam)) {
-			case IDC_MAIN_LBCN: {
-				Roster roster;
-				HWND listboxcharnames = GetDlgItem(hwnd, IDC_MAIN_LBCN);
-				charstats = roster.extractSelStudStats(listboxcharnames);
+				case IDC_MAIN_LBCN: {
+					switch (HIWORD(wParam)) {
+						case LBN_SELCHANGE: {
+							Roster roster;
+							HWND listboxcharnames = GetDlgItem(hwnd, IDC_MAIN_LBCN);
+							charstats = roster.extractSelStudStats(listboxcharnames);
 
-				HWND listviewstats = GetDlgItem(hwnd, IDC_MAIN_LV);
-				UpdateStats(listviewstats, charstats.get());
+							HWND listviewstats = GetDlgItem(hwnd, IDC_MAIN_LV);
+							UpdateStats(listviewstats, charstats.get());
 
-				break;
-			}
-
-			case IDC_MAIN_LBC: {
-				if (ListBox_GetCurSel(GetDlgItem(hwnd, IDC_MAIN_LBCN)) != LB_ERR) {
-					HWND listboxcharnames = GetDlgItem(hwnd, IDC_MAIN_LBCN);
-
-					Roster roster;
-					charstats = roster.extractSelStudStats(listboxcharnames);
-
-					ClassList classlist;
-					HWND listboxclasses = GetDlgItem(hwnd, IDC_MAIN_LBC);
-
-					classstats = classlist.extractSelClassStats(hwnd, listboxclasses);
-
-					HWND listviewstats = GetDlgItem(hwnd, IDC_MAIN_LV);
-					UpdateStats(listviewstats, charstats.get(), classstats.get(), ledger.get());
+							break;
+						}
+					}
+					break;
 				}
-				break;
+
+				case IDC_MAIN_LBC: {
+					switch (HIWORD(wParam)) {
+						case LBN_SELCHANGE: {		
+							if (ListBox_GetCurSel(GetDlgItem(hwnd, IDC_MAIN_LBCN)) != LB_ERR) {
+								HWND listboxcharnames = GetDlgItem(hwnd, IDC_MAIN_LBCN);
+
+								Roster roster;
+								charstats = roster.extractSelStudStats(listboxcharnames);
+
+								ClassList classlist;
+								HWND listboxclasses = GetDlgItem(hwnd, IDC_MAIN_LBC);
+
+								classstats = classlist.extractSelClassStats(hwnd, listboxclasses);
+
+								HWND listviewstats = GetDlgItem(hwnd, IDC_MAIN_LV);
+								UpdateStats(listviewstats, charstats.get(), classstats.get(), ledger.get());
+							}
+
+							break;
+						}
+					}
+
+					break;
+				}
+
+				case IDC_MAIN_LBW: {
+					switch (HIWORD(wParam)) {
+						case LBN_SELCHANGE: {
+							HWND listboxweapons = GetDlgItem(hwnd, IDC_MAIN_LBW);
+
+							WeaponList weaponlist;
+							weaponstats = weaponlist.extractSelWeaponStats(listboxweapons);
+
+							HWND listviewweaponstats = GetDlgItem(hwnd, IDC_MAIN_LVW);
+							UpdateStats(listviewweaponstats, weaponstats.get());
+
+							break;
+						}
+					}
+
+					break;
+				}
+
+				case IDC_MAIN_DDWT: {
+					switch (HIWORD(wParam)) {
+						case CBN_SELCHANGE: {
+							if (ListBox_GetCurSel(GetDlgItem(hwnd, IDC_MAIN_LBW)) != LB_ERR) {
+								HWND listboxweapons = GetDlgItem(hwnd, IDC_MAIN_LBW);
+								UpdateWeaponTypes(listboxweapons, weapontypelist.get());
+							}
+
+							break;
+						}
+					}
+				
+					break;
+				}
+			}
+		}	
+
+		case WM_NOTIFY: {
+			switch (LOWORD(wParam)) {
+				case IDC_MAIN_LV: {
+					LPNMLVCUSTOMDRAW lpNMCustomDraw = (LPNMLVCUSTOMDRAW)lParam;
+					DWORD dwDRAWSTAGE = lpNMCustomDraw->nmcd.dwDrawStage;
+					switch (dwDRAWSTAGE) {
+						case CDDS_PREPAINT: {
+							return CDRF_NOTIFYITEMDRAW;
+						}
+
+						case CDDS_ITEMPREPAINT: {
+							return CDRF_NOTIFYSUBITEMDRAW;
+						}
+
+						case CDDS_SUBITEM | CDDS_ITEMPREPAINT: {
+							if (!ledger->empty()) {
+								if (ledger->at(lpNMCustomDraw->iSubItem).getChange() == true) {
+									lpNMCustomDraw->clrTextBk = COLORREF(RGB(0, 255, 0));
+								}
+								else {
+									lpNMCustomDraw->clrTextBk = COLORREF(GetSysColor(COLOR_WINDOW));
+								}
+							}
+							return CDRF_NEWFONT;
+						}
+					}
+			
+					break;
+				}
 			}
 
-			case IDC_MAIN_LBW: {
+			return DefWindowProc(hwnd, msg, wParam, lParam);
+		}
 
-				HWND listboxweapons = GetDlgItem(hwnd, IDC_MAIN_LBW);
+		case WM_SIZE: {
+			HWND hListBox;
+			RECT rcClient;
 
-				WeaponList weaponlist;
-				weaponstats = weaponlist.extractSelWeaponStats(listboxweapons);
+			GetClientRect(hwnd, &rcClient);
 
-				HWND listviewweaponstats = GetDlgItem(hwnd, IDC_MAIN_LVW);
-				UpdateStats(listviewweaponstats, weaponstats.get());
+			hListBox = GetDlgItem(hwnd, IDC_MAIN_CB);
+			SetWindowPos(hListBox, NULL, 0, 0, rcClient.right, rcClient.bottom, SWP_NOZORDER);
 
-				break;
-			}
-			}
 			break;
 		}
-		}
-		break;
-	}
 
-	case WM_NOTIFY: {
-		LPNMLVCUSTOMDRAW lpNMCustomDraw = (LPNMLVCUSTOMDRAW)lParam;
-		DWORD dwDRAWSTAGE = lpNMCustomDraw->nmcd.dwDrawStage;
-		switch (dwDRAWSTAGE) {
-		case CDDS_PREPAINT: {
-			return CDRF_NOTIFYITEMDRAW;
+		case WM_CLOSE: {
+			DestroyWindow(hwnd);
+			break;
 		}
 
-		case CDDS_ITEMPREPAINT: {
-			return CDRF_NOTIFYSUBITEMDRAW;
+		case WM_DESTROY: {
+			PostQuitMessage(0);
+			break;
 		}
 
-		case CDDS_SUBITEM | CDDS_ITEMPREPAINT: {
-			if (!ledger->empty()) {
-				if (ledger->at(lpNMCustomDraw->iSubItem).getChange() == true) {
-					lpNMCustomDraw->clrTextBk = COLORREF(RGB(0, 255, 0));
-				}
-				else {
-					lpNMCustomDraw->clrTextBk = COLORREF(GetSysColor(COLOR_WINDOW));
-				}
-			}
-			return CDRF_NEWFONT;
+		default: {
+			return DefWindowProc(hwnd, msg, wParam, lParam);
 		}
-		}
-		return DefWindowProc(hwnd, msg, wParam, lParam);
-	}
-
-	case WM_SIZE: {
-		HWND hListBox;
-		RECT rcClient;
-
-		GetClientRect(hwnd, &rcClient);
-
-		hListBox = GetDlgItem(hwnd, IDC_MAIN_CB);
-		SetWindowPos(hListBox, NULL, 0, 0, rcClient.right, rcClient.bottom, SWP_NOZORDER);
-
-		break;
-	}
-
-	case WM_CLOSE: {
-		DestroyWindow(hwnd);
-		break;
-	}
-
-	case WM_DESTROY: {
-		PostQuitMessage(0);
-		break;
-	}
-
-	default: {
-		return DefWindowProc(hwnd, msg, wParam, lParam);
-	}
 	}
 	return TRUE;
 }
@@ -269,18 +306,18 @@ void UpdateStats(HWND listviewstats, Stats* charstats, Stats* classstats, std::v
 
 		if (isBaseGrtr) {
 			std::wstring initbuffer = classtext;
-			ledger->push_back(statMeasure(initbuffer, true));
-			LPWSTR finalbuffer = &initbuffer[0];
-			itemTemp.pszText = finalbuffer;
-			ListView_InsertItem(listviewstats, &itemTemp);
+ledger->push_back(statMeasure(initbuffer, true));
+LPWSTR finalbuffer = &initbuffer[0];
+itemTemp.pszText = finalbuffer;
+ListView_InsertItem(listviewstats, &itemTemp);
 		}
 
 		else if (!isBaseGrtr) {
-			std::wstring initbuffer = chartext;
-			ledger->push_back(statMeasure(initbuffer, false));
-			LPWSTR finalbuffer = &initbuffer[0];
-			itemTemp.pszText = finalbuffer;
-			ListView_InsertItem(listviewstats, &itemTemp);
+		std::wstring initbuffer = chartext;
+		ledger->push_back(statMeasure(initbuffer, false));
+		LPWSTR finalbuffer = &initbuffer[0];
+		itemTemp.pszText = finalbuffer;
+		ListView_InsertItem(listviewstats, &itemTemp);
 		}
 
 		for (int col = 1; col < C_LVS; col++) {
@@ -312,31 +349,31 @@ void UpdateStats(HWND listviewstats, Stats* charstats, Stats* classstats, std::v
 	}
 
 	else if (classstats->getBoolState() == false) {
-		LVITEM itemTemp;
-		itemTemp.mask = LVIF_TEXT;
-		itemTemp.iItem = 0;
+	LVITEM itemTemp;
+	itemTemp.mask = LVIF_TEXT;
+	itemTemp.iItem = 0;
 
-		std::wstring chartext = charstats->extractStatText(0);
-		std::wstring classtext = classstats->extractStatText(0);
-		std::wstring initbuffer = chartext + L" + " + classtext;
-		LPWSTR finalbuffer = &initbuffer[0];
+	std::wstring chartext = charstats->extractStatText(0);
+	std::wstring classtext = classstats->extractStatText(0);
+	std::wstring initbuffer = chartext + L" + " + classtext;
+	LPWSTR finalbuffer = &initbuffer[0];
+
+	itemTemp.pszText = finalbuffer;
+	ListView_InsertItem(listviewstats, &itemTemp);
+
+	for (int col = 0; col < C_LVS; col++) {
+		chartext = charstats->extractStatText(col);
+		classtext = classstats->extractStatText(col);
+		initbuffer = chartext + L" + " + classtext;
+		finalbuffer = &initbuffer[0];
 
 		itemTemp.pszText = finalbuffer;
-		ListView_InsertItem(listviewstats, &itemTemp);
+		itemTemp.iSubItem = col;
 
-		for (int col = 0; col < C_LVS; col++) {
-			chartext = charstats->extractStatText(col);
-			classtext = classstats->extractStatText(col);
-			initbuffer = chartext + L" + " + classtext;
-			finalbuffer = &initbuffer[0];
+		ListView_SetItemText(listviewstats, 0, col, finalbuffer);
+		int asdfffas = 1;
 
-			itemTemp.pszText = finalbuffer;
-			itemTemp.iSubItem = col;
-
-			ListView_SetItemText(listviewstats, 0, col, finalbuffer);
-			int asdfffas = 1;
-
-		}
+	}
 	}
 }
 void UpdateStats(HWND listviewweaponstats, WeaponStats* weaponstats) {
@@ -367,4 +404,18 @@ bool CompareStats(std::wstring chartext, std::wstring classtext) {
 		return true;
 	}
 	return false;
+}
+
+void UpdateWeaponTypes(HWND listboxweapons, std::vector <WeaponType>* weapontypelist){
+	int len = ListBox_GetTextLen(listboxweapons, ListBox_GetCurSel(listboxweapons));
+	const wchar_t* buffer = new const wchar_t[len];
+	ListBox_GetText(listboxweapons, ListBox_GetCurSel(listboxweapons), buffer);
+
+	for (int index = 0; index < weapontypelist->size(); index++) {
+		if (weapontypelist->at(index).getWeaponType().compare(buffer) != 0) {
+			ListBox_DeleteString(listboxweapons, index);
+		}
+	}
+	
+
 }

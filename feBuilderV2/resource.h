@@ -14,6 +14,7 @@
 #define IDC_MAIN_LBW                    206
 #define IDC_MAIN_BCBAS                  207
 #define IDC_MAIN_BCBOS                  208
+#define IDC_MAIN_DDWT					209
 #define IDC_BASICFILEOPEN               301
 #define IDS_HP                          104
 #define IDS_MOVEMENT                    105

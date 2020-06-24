@@ -4,9 +4,17 @@ class WeaponList
 {
 protected:
 	std::vector<Weapon> weaponlist = { //0 in last slot means infinite uses, change later
-		Weapon(L"Broken Sword", WeaponStats(L"0", L"30", L"0", L"1",  L"20", L"E", L"0")),
-		Weapon(L"Iron Sword", WeaponStats(L"5", L"90", L"0", L"1",  L"5", L"E", L"40")),
-		Weapon(L"Steel Sword", WeaponStats(L"8", L"85", L"0", L"1",  L"10", L"D", L"50")) };
+		Weapon(L"Broken Sword", WeaponStats(L"0",  L"30", L"0", L"1", L"20", L"E", L"0")),
+		Weapon(L"Iron Sword",	WeaponStats(L"5",  L"90", L"0", L"1", L"5",  L"E", L"40")),
+		Weapon(L"Steel Sword",	WeaponStats(L"8",  L"85", L"0", L"1", L"10", L"D", L"50")),
+		Weapon(L"Broken Lance", WeaponStats(L"0",  L"30", L"0", L"1", L"20", L"E", L"0")),
+		Weapon(L"Iron Lance",	WeaponStats(L"6",  L"80", L"0", L"1", L"6",  L"E", L"30")), 
+		Weapon(L"Steel Lance",	WeaponStats(L"9",  L"75", L"0", L"1", L"11", L"D", L"40")),
+		Weapon(L"Broken Axe",	WeaponStats(L"0",  L"30", L"0", L"1", L"20", L"E", L"0")),
+		Weapon(L"Iron Axe",		WeaponStats(L"8",  L"70", L"0", L"1", L"7",  L"E", L"45")),
+		Weapon(L"Steel Axe",	WeaponStats(L"11", L"65", L"0", L"1", L"12", L"D", L"55")),
+	};		
+
 public:
 	int getWeaponCount() const {
 		return weaponlist.size();

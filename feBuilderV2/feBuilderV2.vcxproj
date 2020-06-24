@@ -153,6 +153,8 @@
     <ClInclude Include="ButtonTemplate.h" />
     <ClInclude Include="Class.h" />
     <ClInclude Include="ClassList.h" />
+    <ClInclude Include="DropDownTemplate.h" />
+    <ClInclude Include="DropDownWeaponType.h" />
     <ClInclude Include="ListBoxCharNames.h" />
     <ClInclude Include="ListBoxClasses.h" />
     <ClInclude Include="ListBoxTemplate.h" />
@@ -169,6 +171,8 @@
     <ClInclude Include="Weapon.h" />
     <ClInclude Include="WeaponList.h" />
     <ClInclude Include="WeaponStats.h" />
+    <ClInclude Include="WeaponType.h" />
+    <ClInclude Include="WeaponTypeList.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="feBuilderV2.rc" />
