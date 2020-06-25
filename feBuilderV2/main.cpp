@@ -17,7 +17,7 @@ void UpdateStats(HWND listviewstats, Stats* stats);
 void UpdateStats(HWND listviewstats, Stats* charstats, Stats* classstats, std::vector<statMeasure>* ledger);
 void UpdateStats(HWND listviewweaponstats, WeaponStats* weaponstats);
 bool CompareStats(std::wstring chartext, std::wstring classtext);
-void UpdateWeaponTypes(HWND listboxweapons, HWND dropdownweapontypes, WeaponTypeList weapontypelist);
+void UpdateListBoxWeapons(HWND listboxweapons, HWND dropdownweapontypes, WeaponList weaponlist);
 
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
@@ -139,11 +139,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 					switch (HIWORD(wParam)) {
 						case CBN_SELCHANGE: {
 							if (ListBox_GetCurSel(GetDlgItem(hwnd, IDC_MAIN_LBW)) != LB_ERR) {
-								WeaponTypeList weapontypelist;
+								WeaponList weaponlist;
 								HWND listboxweapons = GetDlgItem(hwnd, IDC_MAIN_LBW);
 								HWND dropdownweapontypes = GetDlgItem(hwnd, IDC_MAIN_DDWT);
 
-								UpdateWeaponTypes(listboxweapons, dropdownweapontypes, weapontypelist);
+								UpdateListBoxWeapons(listboxweapons, dropdownweapontypes, weaponlist);
 							}
 
 							break;
@@ -407,18 +407,19 @@ bool CompareStats(std::wstring chartext, std::wstring classtext) {
 	return false;
 }
 
-void UpdateWeaponTypes(HWND listboxweapons, HWND dropdownweapontypes, WeaponTypeList weapontypelist){
+void UpdateListBoxWeapons(HWND listboxweapons, HWND dropdownweapontypes, WeaponList weaponlist){
+	ListBox_ResetContent (listboxweapons);
+	const wchar_t* bufferWDDSel = new const wchar_t[ComboBox_GetLBTextLen(dropdownweapontypes, ComboBox_GetCurSel(dropdownweapontypes))];
+	ComboBox_GetLBText(dropdownweapontypes, ComboBox_GetCurSel(dropdownweapontypes), bufferWDDSel);  //get weapon name that's selected
 
-	const wchar_t* buffer = new const wchar_t[ComboBox_GetLBTextLen(dropdownweapontypes, ComboBox_GetCurSel(dropdownweapontypes))];
-	ComboBox_GetLBText(dropdownweapontypes, ComboBox_GetCurSel(dropdownweapontypes), buffer);
+	for (int index = 0; index < weaponlist.getWeaponCount(); index++) {				//go through the listbox with weapon names
+		
+		std::wstring weapontype = weaponlist.extractWeapon(index).getWeaponType();  //load up weapon from listbox that matches index 
 
-	for (int index = 0; index < weapontypelist.getWeaponTypeCount(); index++) {
-		std::wstring weaponname = weapontypelist.extractWeaponType(index).getWeaponType();
-
-		if (weaponname.compare(buffer) != 0) {
-			ListBox_DeleteString(listboxweapons, index);
+		if (weapontype.compare(bufferWDDSel) == 0) {
+			std::wstring weaponname = weaponlist.extractWeapon(index).getName();
+			LPCTSTR wordtoinsert = &weaponname[0];
+			int error = ListBox_AddString(listboxweapons, wordtoinsert);
 		}
 	}
-	
-
 }

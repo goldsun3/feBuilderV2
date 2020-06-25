@@ -20,6 +20,8 @@ public:
 		if (hDropDown == NULL) {
 			MessageBox(hwnd, L"Could not create list box.", L"Error!", MB_OK | MB_ICONERROR);
 		}
+
+		ComboBox_AddString (hDropDown, L"ALL");
 	}
 
 	void SetWeaponTypes(WeaponTypeList weapontypelist) {
@@ -30,6 +32,7 @@ public:
 			ComboBox_AddString(hDropDown, lastbuffer);
 		}
 
+		ComboBox_SetCurSel(hDropDown, 0);
 	}
 
 	HWND GetHandle() { return hDropDown; }
