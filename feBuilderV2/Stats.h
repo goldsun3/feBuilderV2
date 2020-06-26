@@ -35,6 +35,12 @@ public:
 	}
 
 	void setBase(bool change) { base = change; }
+	std::vector<Stat> getStats() {
+		return allStats;
+	}
+	void augmentAllStats(std::vector<Stat> change) {
+		allStats = change;
+	}
 	std::wstring extractStatText(UINT pos) {
 		std::wstring temp = allStats[pos].extractText();
 		return temp;

@@ -6,9 +6,8 @@ protected:
 	std::wstring stat = L"";
 public:
 	Stat() { stat = L""; }
-
-	void Set(std::wstring change) { stat = change; }
 	Stat(std::wstring change) { stat = change; }
+	void Set(std::wstring change) { stat = change; }
 	std::wstring extractText() { return stat; }
 };
 

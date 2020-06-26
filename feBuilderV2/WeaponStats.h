@@ -30,6 +30,14 @@ public:
 		std::wstring temp = allStats[pos].extractText();
 		return temp;
 	}
+
+	std::vector<Stat> getStats() {
+		return allStats;
+	}
+
+	void augmentAllStats(std::vector<Stat> change) {
+		allStats = change;
+	}
 };
 
 #endif

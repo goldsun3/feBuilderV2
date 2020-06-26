@@ -31,6 +31,15 @@ public:
 		allStats.push_back(Stat(uCRITAVO));
 		allStats.push_back(Stat(uRNGE));
 	}
+
+	std::vector<Stat> getStats() {
+		return allStats;
+	}
+
+	void augmentAllStats(std::vector<Stat> change) {
+		allStats = change;
+	}
+
 };
 
 #endif

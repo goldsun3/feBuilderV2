@@ -5,7 +5,7 @@ class StatCalculator
 protected:
 	Stats		studentstats;
 	WeaponStats weaponstats;
-	TotalStats	totalstats;
+	TotalStats	totalstats = { L"0" , L"0" , L"0" , L"0" , L"0" , L"0" , L"0" , L"0" , L"0" , L"0" , L"0" };
 public:
 	StatCalculator(){
 		studentstats = Stats(L"0", L"0", L"0", L"0", L"0", L"0", L"0", L"0", L"0", L"0");
@@ -13,20 +13,38 @@ public:
 	}
 	void setStats(Stats* stats, WeaponStats* wpnstats) {
 		if (stats != nullptr){
-			studentstats.setAllStats(stats->extractStatText(0), stats->extractStatText(1), stats->extractStatText(2),
-									stats->extractStatText(3), stats->extractStatText(4), stats->extractStatText(5), 
-									stats->extractStatText(6), stats->extractStatText(7), stats->extractStatText(8), stats->extractStatText(9));
+			std::vector<Stat> temp = studentstats.getStats();
+			temp.at(0).Set(stats->extractStatText(0));
+			temp.at(1).Set(stats->extractStatText(1));
+			temp.at(2).Set(stats->extractStatText(2));
+			temp.at(3).Set(stats->extractStatText(3));
+			temp.at(4).Set(stats->extractStatText(4));
+			temp.at(5).Set(stats->extractStatText(5));
+			temp.at(6).Set(stats->extractStatText(6));
+			temp.at(7).Set(stats->extractStatText(7));
+			temp.at(8).Set(stats->extractStatText(8));
+			temp.at(9).Set(stats->extractStatText(9));
+			studentstats.augmentAllStats(temp);
 		}
 
 		if (wpnstats != nullptr) {
-			weaponstats.setAllStats(wpnstats->extractStatText(0), wpnstats->extractStatText(1), wpnstats->extractStatText(2),
-									wpnstats->extractStatText(3), wpnstats->extractStatText(4), wpnstats->extractStatText(5),
-									wpnstats->extractStatText(6));
+			std::vector<Stat> temp = weaponstats.getStats();
+			temp.at(0).Set(wpnstats->extractStatText(0));
+			temp.at(1).Set(wpnstats->extractStatText(1));
+			temp.at(2).Set(wpnstats->extractStatText(2));
+			temp.at(3).Set(wpnstats->extractStatText(3));
+			temp.at(4).Set(wpnstats->extractStatText(4));
+			temp.at(5).Set(wpnstats->extractStatText(5));
+			temp.at(6).Set(wpnstats->extractStatText(6));
+			temp.at(7).Set(wpnstats->extractStatText(7));
+			temp.at(8).Set(wpnstats->extractStatText(8));
+			temp.at(9).Set(wpnstats->extractStatText(9));
+			weaponstats.augmentAllStats(temp);
 		}
 	}
-
-	std::wstring CalculateTotalPhysicalAttack() {
-		std::wstring temp = std::to_wstring(std::stoi(studentstats.extractStatText(2))
+	void CalculateTotalPhysicalAttack() {
+		std::vector<Stat> change = totalstats.getStats();
+		std::wstring buffer = std::to_wstring(std::stoi(studentstats.extractStatText(2))
 										  + std::stoi(weaponstats.extractStatText(0))
 											/*+ ifEffective(Weapon Might x3)
 											+ Combat Art 
@@ -35,10 +53,12 @@ public:
 											+ Linked attacks 
 											+/- Terrain Effects 
 											- Enemies Protection*/);
-		return temp;
+		change.at(0).Set(buffer);
+		totalstats.augmentAllStats(change);
 	}
-	std::wstring CalculateTotalMagicAttack() {
-		std::wstring temp = std::to_wstring (std::stoi(studentstats.extractStatText(3))
+	void CalculateTotalMagicAttack() {
+		std::vector<Stat> change = totalstats.getStats();
+		std::wstring buffer = std::to_wstring (std::stoi(studentstats.extractStatText(3))
 										   + std::stoi(weaponstats.extractStatText(0))
 											/*+ ifEffective(Weapon Might x3)
 											+ Combat Art
@@ -48,10 +68,12 @@ public:
 											+ Linked attacks
 											+/- Terrain Effects
 											- Enemies Resilience*/);
-		return temp;
+		change.at(1).Set(buffer);
+		totalstats.augmentAllStats(change);
 	}
-	std::wstring CalculateTotalPhysicalHit() {
-		std::wstring temp = std::to_wstring(std::stoi(studentstats.extractStatText(4))
+	void CalculateTotalPhysicalHit() {
+		std::vector<Stat> change = totalstats.getStats();
+		std::wstring buffer = std::to_wstring(std::stoi(studentstats.extractStatText(4))
 										  + std::stoi(weaponstats.extractStatText(1))
 										/*+ Combat Art
 										+ Skills
@@ -59,56 +81,81 @@ public:
 										+ Linked attacks
 										+/- Terrain Effects
 										- Enemies Avoid*/);
-		return temp;
+		change.at(2).Set(buffer);
+		totalstats.augmentAllStats(change);
 	}
-	std::wstring CalculateTotalMagicHit() {
-		std::wstring temp = std::to_wstring ((std::stoi(studentstats.extractStatText(4)) / 2)
+	void CalculateTotalMagicHit() {
+		std::vector<Stat> change = totalstats.getStats();
+		std::wstring buffer = std::to_wstring ((std::stoi(studentstats.extractStatText(4)) / 2)
 										   + (std::stoi(studentstats.extractStatText(6)) / 2)
 											+ std::stoi(weaponstats.extractStatText(1))
 										/*+ Skills
 										+/- Battalions
 										+ Linked attacks
 										- Enemies Magic Avoid*/);
-		return temp;
+		change.at(3).Set(buffer);
+		totalstats.augmentAllStats(change);
 	}
-	std::wstring CalculateTotalCrit() {
-		std::wstring temp = std::to_wstring(((std::stoi(studentstats.extractStatText(4)) + std::stoi(studentstats.extractStatText(6))) / 2)
+	void CalculateTotalCrit() {
+		std::vector<Stat> change = totalstats.getStats();
+		std::wstring buffer = std::to_wstring(((std::stoi(studentstats.extractStatText(4)) + std::stoi(studentstats.extractStatText(6))) / 2)
 										    + std::stoi(weaponstats.extractStatText(2))
 											/*+Skills*/);
-		return temp;
+		change.at(4).Set(buffer);
+		totalstats.augmentAllStats(change);
 	}
-	std::wstring CalculateAS() {
-		std::wstring temp = std::to_wstring(std::stoi(studentstats.extractStatText(5))
+	void CalculateAS() {
+		std::vector<Stat> change = totalstats.getStats();
+		std::wstring buffer = std::to_wstring(std::stoi(studentstats.extractStatText(5))
 										+ ((std::stoi(weaponstats.extractStatText(4)) - std::stoi(weaponstats.extractStatText(2))) / 5));
-		return temp;
+		change.at(5).Set(buffer);
+		totalstats.augmentAllStats(change);
 	}
-	std::wstring CalculateTotalProt() {
-		std::wstring temp = std::to_wstring(std::stoi(studentstats.extractStatText(7))
+	void CalculateTotalProt() {
+		std::vector<Stat> change = totalstats.getStats();
+		std::wstring buffer = std::to_wstring(std::stoi(studentstats.extractStatText(7))
 											/*+/- Battalions
 											+ Equipment*/);
-		return temp;
+		change.at(6).Set(buffer);
+		totalstats.augmentAllStats(change);
 	}
-	std::wstring CalculateTotalResilience() {
-		std::wstring temp = std::to_wstring(std::stoi(studentstats.extractStatText(8))
+	void CalculateTotalResilience() {
+		std::vector<Stat> change = totalstats.getStats();
+		std::wstring buffer = std::to_wstring(std::stoi(studentstats.extractStatText(8))
 											/*+/- Battalions
 											+ Equipment*/);
-		return temp;
+		change.at(7).Set(buffer);
+		totalstats.augmentAllStats(change);
 	}
-	std::wstring CalculateTotalAvoid() {
-		std::wstring temp = std::to_wstring(std::stoi(CalculateAS())
+	void CalculateTotalAvoid() {
+		std::vector<Stat> change = totalstats.getStats();
+		std::wstring buffer = std::to_wstring(std::stoi((totalstats.getStats())[5].extractText())
 											/*+ Skills 
 											+/- Battalions
 											+/- Terrain Effects*/);
-		return temp;
+		change.at(8).Set(buffer);
+		totalstats.augmentAllStats(change);
 	}
-	std::wstring CalculateTotalCritAvoid() {
-		std::wstring temp = std::to_wstring(std::stoi(weaponstats.extractStatText(2))
+	void CalculateTotalCritAvoid() {
+		std::vector<Stat> change = totalstats.getStats();
+		std::wstring buffer = std::to_wstring(std::stoi(weaponstats.extractStatText(2))
 										  - std::stoi(studentstats.extractStatText(6)));
-		return temp;
+
+		change.at(9).Set(buffer);
+		totalstats.augmentAllStats(change);
 	}
-	std::wstring CalculateTotalRange() {
-		return weaponstats.extractStatText(3);
+	void CalculateTotalRange() {
+		std::vector<Stat> change = totalstats.getStats();
+		std::wstring buffer = weaponstats.extractStatText(3);
+
+		change.at(10).Set(buffer);
+		totalstats.augmentAllStats(change);
 	}
+
+	TotalStats getTotalStats() {
+		return totalstats;
+	}
+
 };
 
 #endif

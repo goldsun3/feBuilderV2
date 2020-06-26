@@ -304,8 +304,8 @@ void UpdateListViewStats(HWND listviewstats, Stats* stats) {
 
 		ListView_SetItemText(listviewstats, 0, col, finalbuffer);
 	}
-
-	UpdateListViewTotalStats(listviewstats, stats, nullptr);
+	GetDlgItem(GetParent(listviewstats), IDC_MAIN_LVTS);
+	UpdateListViewTotalStats(GetDlgItem(GetParent(listviewstats), IDC_MAIN_LVTS), stats, nullptr);
 }
 void UpdateANDAugmentListViewStats(HWND listviewstats, Stats* charstats, Stats* classstats, std::vector<statMeasure>* ledger) {
 	if (classstats->getBoolState() == true) {
@@ -443,27 +443,38 @@ void UpdateListBoxWeapons(HWND listboxweapons, HWND dropdownweapontypes, WeaponL
 		}
 	}
 }
-void UpdateListViewTotalStats(HWND hwnd, Stats* stats, WeaponStats* weaponstats) {
+void UpdateListViewTotalStats(HWND listviewtotalstats, Stats* stats, WeaponStats* weaponstats) {
 	static StatCalculator statcalculator;
 	statcalculator.setStats(stats, nullptr);
-	statcalculator.CalculateTotalPhysicalAttack()
+	statcalculator.CalculateTotalPhysicalAttack();
+	statcalculator.CalculateTotalMagicAttack();
+	statcalculator.CalculateTotalPhysicalHit();
+	statcalculator.CalculateTotalMagicHit();
+	statcalculator.CalculateTotalCrit();
+	statcalculator.CalculateAS();
+	statcalculator.CalculateTotalProt();
+	statcalculator.CalculateTotalResilience();
+	statcalculator.CalculateTotalAvoid();
+	statcalculator.CalculateTotalCritAvoid();
+	statcalculator.CalculateTotalRange();
+
 	LVITEM itemTemp;
 	itemTemp.mask = LVIF_TEXT;
 	itemTemp.iItem = 0;
-	std::wstring initbuffer = statcalculator.extractStatText(0);
+	std::wstring initbuffer = (statcalculator.getTotalStats().getStats())[0].extractText();
 	LPWSTR finalbuffer = &initbuffer [0];
 
 	itemTemp.pszText = finalbuffer;
-	ListView_InsertItem(hwnd, &itemTemp);
+	ListView_InsertItem(listviewtotalstats, &itemTemp);
 
 	for (int col = 0; col < C_LVTS; col++) {
-		initbuffer = stats->extractStatText(col);
+		initbuffer = (statcalculator.getTotalStats().getStats())[col].extractText();
 		finalbuffer = &initbuffer [0];
 
 		itemTemp.pszText = finalbuffer;
 		itemTemp.iSubItem = col;
 
-		ListView_SetItemText(hwnd, 0, col, finalbuffer);
+		ListView_SetItemText(listviewtotalstats, 0, col, finalbuffer);
 	}
 
 }
