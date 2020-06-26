@@ -4,9 +4,14 @@ class WeaponTypeList
 {
 protected:
 	std::vector<WeaponType> weapontypelist = {
-		WeaponType(L"Sword"),
-		WeaponType(L"Lance"),
-		WeaponType(L"Axe")
+		WeaponType (L"Sword"),
+		WeaponType (L"Lance"),
+		WeaponType (L"Axe"),
+		WeaponType (L"Bow"),
+		WeaponType (L"Gauntlets"),
+		WeaponType (L"Black Magic"),
+		WeaponType (L"Dark Magic"),
+		WeaponType (L"White Magic")
 	};
 public:
 	int getWeaponTypeCount() const {
