@@ -95,6 +95,15 @@
     <ClInclude Include="DropDownWeaponTypes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="StatCalculator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ListViewTotalStats.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TotalStats.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="feBuilderV2.rc">

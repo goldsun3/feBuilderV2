@@ -84,7 +84,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <WarningLevel>Level4</WarningLevel>
+      <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
@@ -99,7 +99,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <WarningLevel>Level4</WarningLevel>
+      <WarningLevel>Level3</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
@@ -161,13 +161,16 @@
     <ClInclude Include="ListBoxWeapons.h" />
     <ClInclude Include="ListViewStats.h" />
     <ClInclude Include="ListViewTemplate.h" />
+    <ClInclude Include="ListViewTotalStats.h" />
     <ClInclude Include="ListViewWeaponStats.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Roster.h" />
     <ClInclude Include="Stat.h" />
+    <ClInclude Include="StatCalculator.h" />
     <ClInclude Include="Stats.h" />
     <ClInclude Include="Student.h" />
+    <ClInclude Include="TotalStats.h" />
     <ClInclude Include="Weapon.h" />
     <ClInclude Include="WeaponList.h" />
     <ClInclude Include="WeaponStats.h" />

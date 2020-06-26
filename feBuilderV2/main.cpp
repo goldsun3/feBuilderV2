@@ -13,11 +13,13 @@ struct statMeasure {
 	bool getChange() { return change; }
 };
 
-void UpdateStats(HWND listviewstats, Stats* stats);
-void UpdateStats(HWND listviewstats, Stats* charstats, Stats* classstats, std::vector<statMeasure>* ledger);
-void UpdateStats(HWND listviewweaponstats, WeaponStats* weaponstats);
+void UpdateListViewStats(HWND listviewstats, Stats* stats);
+void UpdateANDAugmentListViewStats(HWND listviewstats, Stats* charstats, Stats* classstats, std::vector<statMeasure>* ledger);
+void UpdateListViewWeaponStats(HWND listviewweaponstats, WeaponStats* weaponstats);
 bool CompareStats(std::wstring chartext, std::wstring classtext);
 void UpdateListBoxWeapons(HWND listboxweapons, HWND dropdownweapontypes, WeaponList weaponlist);
+void UpdateListViewTotalStats(HWND hwnd, Stats* stats, WeaponStats* weaponstats);
+
 
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
@@ -70,6 +72,12 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 			listviewweaponstats.Construct(hwnd);
 			listviewweaponstats.SetColumns(hwnd);
 			listviewweaponstats.SetColumnSpacing();
+
+			ListViewTotalStats listviewtotalstats;
+			listviewtotalstats.Construct(hwnd);
+			listviewtotalstats.SetColumns(hwnd);
+			listviewtotalstats.SetColumnSpacing();
+
 			break;
 		}
 
@@ -82,9 +90,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 							Roster roster;
 							HWND listboxcharnames = GetDlgItem(hwnd, IDC_MAIN_LBCN);
 							charstats = roster.extractSelStudStats(listboxcharnames);
-
+							ListBox_SetCurSel(GetDlgItem(hwnd, IDC_MAIN_LBW), -1);
+							ListBox_SetCurSel(GetDlgItem(hwnd, IDC_MAIN_LBC), -1);
 							HWND listviewstats = GetDlgItem(hwnd, IDC_MAIN_LV);
-							UpdateStats(listviewstats, charstats.get());
+							UpdateListViewStats(listviewstats, charstats.get());
 
 							break;
 						}
@@ -107,7 +116,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 								classstats = classlist.extractSelClassStats(hwnd, listboxclasses);
 
 								HWND listviewstats = GetDlgItem(hwnd, IDC_MAIN_LV);
-								UpdateStats(listviewstats, charstats.get(), classstats.get(), ledger.get());
+								UpdateANDAugmentListViewStats(listviewstats, charstats.get(), classstats.get(), ledger.get());
 							}
 
 							break;
@@ -126,7 +135,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 							weaponstats = weaponlist.extractSelWeaponStats(listboxweapons);
 
 							HWND listviewweaponstats = GetDlgItem(hwnd, IDC_MAIN_LVW);
-							UpdateStats(listviewweaponstats, weaponstats.get());
+							UpdateListViewWeaponStats(listviewweaponstats, weaponstats.get());
 
 							break;
 						}
@@ -276,7 +285,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	return Msg.wParam;
 }
 
-void UpdateStats(HWND listviewstats, Stats* stats) {
+void UpdateListViewStats(HWND listviewstats, Stats* stats) {
 	LVITEM itemTemp;
 	itemTemp.mask = LVIF_TEXT;
 	itemTemp.iItem = 0;
@@ -295,8 +304,10 @@ void UpdateStats(HWND listviewstats, Stats* stats) {
 
 		ListView_SetItemText(listviewstats, 0, col, finalbuffer);
 	}
+
+	UpdateListViewTotalStats(listviewstats, stats, nullptr);
 }
-void UpdateStats(HWND listviewstats, Stats* charstats, Stats* classstats, std::vector<statMeasure>* ledger) {
+void UpdateANDAugmentListViewStats(HWND listviewstats, Stats* charstats, Stats* classstats, std::vector<statMeasure>* ledger) {
 	if (classstats->getBoolState() == true) {
 		LVITEM itemTemp;
 		itemTemp.mask = LVIF_TEXT;
@@ -378,7 +389,7 @@ void UpdateStats(HWND listviewstats, Stats* charstats, Stats* classstats, std::v
 	}
 	}
 }
-void UpdateStats(HWND listviewweaponstats, WeaponStats* weaponstats) {
+void UpdateListViewWeaponStats(HWND listviewweaponstats, WeaponStats* weaponstats) {
 	LVITEM itemTemp;
 	itemTemp.mask = LVIF_TEXT;
 	itemTemp.iItem = 0;
@@ -431,4 +442,28 @@ void UpdateListBoxWeapons(HWND listboxweapons, HWND dropdownweapontypes, WeaponL
 			}
 		}
 	}
+}
+void UpdateListViewTotalStats(HWND hwnd, Stats* stats, WeaponStats* weaponstats) {
+	static StatCalculator statcalculator;
+	statcalculator.setStats(stats, nullptr);
+	statcalculator.CalculateTotalPhysicalAttack()
+	LVITEM itemTemp;
+	itemTemp.mask = LVIF_TEXT;
+	itemTemp.iItem = 0;
+	std::wstring initbuffer = statcalculator.extractStatText(0);
+	LPWSTR finalbuffer = &initbuffer [0];
+
+	itemTemp.pszText = finalbuffer;
+	ListView_InsertItem(hwnd, &itemTemp);
+
+	for (int col = 0; col < C_LVTS; col++) {
+		initbuffer = stats->extractStatText(col);
+		finalbuffer = &initbuffer [0];
+
+		itemTemp.pszText = finalbuffer;
+		itemTemp.iSubItem = col;
+
+		ListView_SetItemText(hwnd, 0, col, finalbuffer);
+	}
+
 }

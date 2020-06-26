@@ -99,6 +99,21 @@ BEGIN
     IDS_WEIGHT              "WEIGHT"
     IDS_SKILLLVL            "SKILL LEVEL"
     IDS_USES                "USES"
+    IDS_PHYSATK             "PHYSATK"
+    IDS_MGKATK              "MGKATK"
+    IDS_PHYSHIT             "PHYSHIT"
+    IDS_MGKHIT              "MGKHIT"
+    IDS_TCRIT               "TCRIT"
+    IDS_AS                  "AS"
+    IDS_TPROT               "TPROT"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_TRSL                "TRSL"
+    IDS_AVD                 "AVD"
+    IDS_CRITAVD             "CRITAVD"
+    IDS_RNGE                "RNGE"
 END
 
 #endif    // English (United States) resources

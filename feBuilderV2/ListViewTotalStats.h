@@ -1,10 +1,12 @@
-#ifndef LISTVIEWSTATS_H
-#define LISTVIEWSTATS_H
-class ListViewStats : public ListViewTemplate{
+#ifndef LISTVIEWTOTALSTATS_H
+#define LISTVIEWTOTALSTATS_H
+
+class ListViewTotalStats : ListViewTemplate {
 protected:
 	LVCOLUMN lvc;
 	LVITEM lvi;
-	std::vector<std::wstring> initStats{ L"0", L"0", L"0", L"0", L"0", L"0", L"0", L"0", L"0", L"0" };
+	std::vector<std::wstring> initStats { L"0", L"0", L"0", L"0", L"0", L"0", L"0", L"0", L"0", L"0", L"0" };
+
 public:
 	virtual void Construct(HWND hwnd) {
 		hListView = CreateWindowEx(
@@ -13,9 +15,9 @@ public:
 			L"",
 			WS_CHILD | WS_CLIPSIBLINGS | WS_VISIBLE |
 			LVS_REPORT,
-			350, 10, xlen, ylen,
+			350, 400, xlen, ylen,
 			hwnd,
-			(HMENU)IDC_MAIN_LV,
+			(HMENU)IDC_MAIN_LVTS,
 			GetModuleHandle(NULL),
 			NULL);
 
@@ -28,7 +30,7 @@ public:
 		lvc.mask = LVCF_FMT | LVCF_WIDTH | LVCF_TEXT | LVCF_SUBITEM;
 		lvi.mask = LVIF_TEXT;
 
-		for (int col = 0; col < C_LVS; col++) {
+		for (int col = 0; col < C_LVTS; col++) {
 
 			lvc.iSubItem = col;
 			lvc.pszText = buffer;
@@ -37,7 +39,7 @@ public:
 
 			LoadString(
 				GetModuleHandle(NULL),
-				IDS_HP + col,
+				IDS_PHYSATK + col,
 				buffer,
 				sizeof(buffer));
 
@@ -47,9 +49,9 @@ public:
 		}
 
 		ListView_InsertItem(hListView, &lvi);
-		for (int col = 0; col < C_LVS; col++) {
-			std::wstring initbuffer = initStats[col];
-			LPWSTR finalbuffer = &initbuffer[0];
+		for (int col = 0; col < C_LVTS; col++) {
+			std::wstring initbuffer = initStats [col];
+			LPWSTR finalbuffer = &initbuffer [0];
 			lvi.pszText = finalbuffer;
 			lvi.iSubItem = col;
 			ListView_SetItem(hListView, &lvi);
@@ -57,14 +59,12 @@ public:
 	}
 
 	virtual void SetColumnSpacing() {
-		for (int col = 0; col < C_LVS; col++) {
+		for (int col = 0; col < C_LVTS; col++) {
 			ListView_SetColumnWidth(hListView, col, LVSCW_AUTOSIZE_USEHEADER);
 		}
 	}
 
 	HWND GetHandle() { return hListView; }
-
-
 };
 
 #endif
