@@ -138,13 +138,13 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 				case IDC_MAIN_DDWT: {
 					switch (HIWORD(wParam)) {
 						case CBN_SELCHANGE: {
-							if (ListBox_GetCurSel(GetDlgItem(hwnd, IDC_MAIN_LBW)) != LB_ERR) {
+							//if (ListBox_GetCurSel(GetDlgItem(hwnd, IDC_MAIN_LBW)) != LB_ERR) {
 								WeaponList weaponlist;
 								HWND listboxweapons = GetDlgItem(hwnd, IDC_MAIN_LBW);
 								HWND dropdownweapontypes = GetDlgItem(hwnd, IDC_MAIN_DDWT);
 
 								UpdateListBoxWeapons(listboxweapons, dropdownweapontypes, weaponlist);
-							}
+							/*}*/
 
 							break;
 						}
@@ -308,18 +308,18 @@ void UpdateStats(HWND listviewstats, Stats* charstats, Stats* classstats, std::v
 
 		if (isBaseGrtr) {
 			std::wstring initbuffer = classtext;
-ledger->push_back(statMeasure(initbuffer, true));
-LPWSTR finalbuffer = &initbuffer[0];
-itemTemp.pszText = finalbuffer;
-ListView_InsertItem(listviewstats, &itemTemp);
+			ledger->push_back(statMeasure(initbuffer, true));
+			LPWSTR finalbuffer = &initbuffer[0];
+			itemTemp.pszText = finalbuffer;
+			ListView_InsertItem(listviewstats, &itemTemp);
 		}
 
 		else if (!isBaseGrtr) {
-		std::wstring initbuffer = chartext;
-		ledger->push_back(statMeasure(initbuffer, false));
-		LPWSTR finalbuffer = &initbuffer[0];
-		itemTemp.pszText = finalbuffer;
-		ListView_InsertItem(listviewstats, &itemTemp);
+			std::wstring initbuffer = chartext;
+			ledger->push_back(statMeasure(initbuffer, false));
+			LPWSTR finalbuffer = &initbuffer[0];
+			itemTemp.pszText = finalbuffer;
+			ListView_InsertItem(listviewstats, &itemTemp);
 		}
 
 		for (int col = 1; col < C_LVS; col++) {
@@ -406,20 +406,29 @@ bool CompareStats(std::wstring chartext, std::wstring classtext) {
 	}
 	return false;
 }
-
 void UpdateListBoxWeapons(HWND listboxweapons, HWND dropdownweapontypes, WeaponList weaponlist){
 	ListBox_ResetContent (listboxweapons);
-	const wchar_t* bufferWDDSel = new const wchar_t[ComboBox_GetLBTextLen(dropdownweapontypes, ComboBox_GetCurSel(dropdownweapontypes))];
-	ComboBox_GetLBText(dropdownweapontypes, ComboBox_GetCurSel(dropdownweapontypes), bufferWDDSel);  //get weapon name that's selected
 
-	for (int index = 0; index < weaponlist.getWeaponCount(); index++) {				//go through the listbox with weapon names
+	const wchar_t* bufferDDWTSel = new const wchar_t[ComboBox_GetLBTextLen(dropdownweapontypes, ComboBox_GetCurSel(dropdownweapontypes))];
+	ComboBox_GetLBText(dropdownweapontypes, ComboBox_GetCurSel(dropdownweapontypes), bufferDDWTSel);  //get weapon name that's selected
+
+	if (wcscmp(bufferDDWTSel, L"ALL") == 0){
+		for (int index = 0; index < weaponlist.getWeaponCount (); index++) {				//go through the listbox with weapon names
+			std::wstring weaponname = weaponlist.extractWeapon (index).getName ();
+			LPCTSTR wordtoinsert = &weaponname [0];
+			int error = ListBox_AddString (listboxweapons, wordtoinsert);
+		}
+	}
+	else{
+		for (int index = 0; index < weaponlist.getWeaponCount(); index++) {				//go through the listbox with weapon names
 		
-		std::wstring weapontype = weaponlist.extractWeapon(index).getWeaponType();  //load up weapon from listbox that matches index 
+			std::wstring weapontype = weaponlist.extractWeapon(index).getWeaponType();  //load up weapon from listbox that matches index 
 
-		if (weapontype.compare(bufferWDDSel) == 0) {
-			std::wstring weaponname = weaponlist.extractWeapon(index).getName();
-			LPCTSTR wordtoinsert = &weaponname[0];
-			int error = ListBox_AddString(listboxweapons, wordtoinsert);
+			if (weapontype.compare(bufferDDWTSel) == 0) {
+				std::wstring weaponname = weaponlist.extractWeapon(index).getName();
+				LPCTSTR wordtoinsert = &weaponname[0];
+				int error = ListBox_AddString(listboxweapons, wordtoinsert);
+			}
 		}
 	}
 }
