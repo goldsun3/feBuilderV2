@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ButtonClassBaseStats" Collapsed="true">
+    <Position X="16" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ButtonClassBaseStats.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ButtonClassBoostedStats" Collapsed="true">
+    <Position X="14.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ButtonClassBoostedStats.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ButtonTemplate" Collapsed="true">
+    <Position X="15.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>ButtonTemplate.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Class" Collapsed="true">
+    <Position X="5.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BABABAAAAAAABEAAAAIAAAAAQAAEAABAAAAEAAAAAAA=</HashCode>
+      <FileName>Class.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ClassList" Collapsed="true">
+    <Position X="5.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAQAIAgAAAAAAAAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ClassList.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DropDownTemplate" Collapsed="true">
+    <Position X="15.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>DropDownTemplate.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DropDownWeaponTypes" Collapsed="true">
+    <Position X="15.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AYAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DropDownWeaponTypes.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ListBoxCharNames" Collapsed="true">
+    <Position X="19.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAgAAABAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ListBoxCharNames.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ListBoxClasses" Collapsed="true">
+    <Position X="17.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAIAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ListBoxClasses.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ListBoxTemplate" Collapsed="true">
+    <Position X="19.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ListBoxTemplate.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ListBoxWeapons" Collapsed="true">
+    <Position X="21.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>ListBoxWeapons.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ListViewStats" Collapsed="true">
+    <Position X="21.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAQAAAAAAIgAAAAAAAAAAAAAAAAAAAAAAAAAAIAAE=</HashCode>
+      <FileName>ListViewStats.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ListViewTemplate" Collapsed="true">
+    <Position X="19.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAQAAAAAAIgAAAAAAAAAIAAAABAAAAAABAAAAAAAA=</HashCode>
+      <FileName>ListViewTemplate.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ListViewTotalStats" Collapsed="true">
+    <Position X="19.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAQAAAAAAIgAAAAAAAAAAAAAAAAAAAAAAAAAAIAAE=</HashCode>
+      <FileName>ListViewTotalStats.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ListViewWeaponStats" Collapsed="true">
+    <Position X="17.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAQAAAAAAIgAAAAAAAAAAAAAAAAAAAAAAAAAAIAAE=</HashCode>
+      <FileName>ListViewWeaponStats.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Roster" Collapsed="true">
+    <Position X="7.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABCAAAEAAAQBAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Roster.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Stat" Collapsed="true">
+    <Position X="5.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAAAQAAAAgAAAAIAAAAAAAA=</HashCode>
+      <FileName>Stat.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StatCalculator" Collapsed="true">
+    <Position X="10" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQBAAAAAAQAAAAAIAAAEAAACBAAAoAAACVAACACQA=</HashCode>
+      <FileName>StatCalculator.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Stats" Collapsed="true">
+    <Position X="5.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gBFCAACAAAAABgAAAAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Stats.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Student" Collapsed="true">
+    <Position X="7.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEQAAAQQAAAAAAAAAAAAAAAAAAEAABAAAAEAAACAAA=</HashCode>
+      <FileName>Student.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TotalStats" Collapsed="true">
+    <Position X="7.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAECAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>TotalStats.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Weapon" Collapsed="true">
+    <Position X="2.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgEQAAAAAAAAAAAAAAAAAAAgAAAGAAhAAAAEAAAAAAA=</HashCode>
+      <FileName>Weapon.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeaponList" Collapsed="true">
+    <Position X="2.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAIAAEAAAAAAAAAAAAAAAQBAAAAAAAAAAA=</HashCode>
+      <FileName>WeaponList.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeaponStats" Collapsed="true">
+    <Position X="3.25" Y="1.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>gAECAACAAAAAAgAAAAAAAAAAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>WeaponStats.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeaponType" Collapsed="true">
+    <Position X="1.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAAAAAAAAAgAAACAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>WeaponType.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeaponTypeList" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAIAAABAAAAAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>WeaponTypeList.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="statMeasure" Collapsed="true">
+    <Position X="10" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAEAAAEAAAAAAAAACA=</HashCode>
+      <FileName>main.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

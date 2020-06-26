@@ -359,6 +359,9 @@ void UpdateANDAugmentListViewStats(HWND listviewstats, Stats* charstats, Stats* 
 
 			}
 		}
+
+		GetDlgItem(GetParent(listviewstats), IDC_MAIN_LVTS);
+		UpdateListViewTotalStats(GetDlgItem(GetParent(listviewstats), IDC_MAIN_LVTS), charstats, nullptr);
 	}
 
 	else if (classstats->getBoolState() == false) {
