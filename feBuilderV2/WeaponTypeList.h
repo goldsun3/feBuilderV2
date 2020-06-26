@@ -14,15 +14,15 @@ protected:
 		WeaponType (L"White Magic")
 	};
 public:
-	int getWeaponTypeCount() const {
+	int getSize() const {
 		return weapontypelist.size();
 	}
 
-	WeaponType extractWeaponType(UINT pos) {
+	WeaponType getWeaponType(UINT pos) {
 		return weapontypelist[pos];
 	}
 
-	WeaponType extractWeaponTypePtr(UINT pos) const {
+	WeaponType getWeaponTypePtr(UINT pos) const {
 		return weapontypelist[pos];
 	}
 

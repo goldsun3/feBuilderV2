@@ -105,17 +105,17 @@
       <FileName>ListViewWeaponStats.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Roster" Collapsed="true">
+  <Class Name="StudentList" Collapsed="true">
     <Position X="7.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAABCAAAEAAAQBAAAABAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Roster.h</FileName>
+      <HashCode>AAAAAAAAAAAAhCAAAAAAAQAAAAABAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>StudentList.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Stat" Collapsed="true">
     <Position X="5.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAABAAAAAAAAAAAQAAAAgAAAAIAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAIAAAAIgAA=</HashCode>
       <FileName>Stat.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -129,7 +129,7 @@
   <Class Name="Stats" Collapsed="true">
     <Position X="5.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gBFCAACAAAAABgAAAAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>gBJAAAAAAIAABkAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Stats.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -141,21 +141,21 @@
     </TypeIdentifier>
   </Class>
   <Class Name="TotalStats" Collapsed="true">
-    <Position X="7.25" Y="1.5" Width="1.5" />
+    <Position X="7.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gAECAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <HashCode>gAIAAAAAAIAAAgAAAAAACAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
       <FileName>TotalStats.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Weapon" Collapsed="true">
-    <Position X="2.5" Y="2.5" Width="1.5" />
+    <Position X="3.25" Y="2.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AgEQAAAAAAAAAAAAAAAAAAAgAAAGAAhAAAAEAAAAAAA=</HashCode>
       <FileName>Weapon.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WeaponList" Collapsed="true">
-    <Position X="2.5" Y="3.5" Width="1.5" />
+    <Position X="3.25" Y="3.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAAAIAAEAAAAAAAAAAAAAAAQBAAAAAAAAAAA=</HashCode>
       <FileName>WeaponList.h</FileName>
@@ -164,19 +164,19 @@
   <Class Name="WeaponStats" Collapsed="true">
     <Position X="3.25" Y="1.5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>gAECAACAAAAAAgAAAAAAAAAAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <HashCode>gAIAAAAAAIAAAgAAAAAACAAAAAAAAAgAAAAAAAAAAAA=</HashCode>
       <FileName>WeaponStats.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WeaponType" Collapsed="true">
-    <Position X="1.5" Y="1.5" Width="1.5" />
+    <Position X="0.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AgAAAAAAAAAAAAAAAAAAAAAgAAACAAAAAAAAAAIAAAA=</HashCode>
+      <HashCode>AgAAAAAAAAAAAAAAAAAAAAAgAAACAAAAAAAAAAAAAAA=</HashCode>
       <FileName>WeaponType.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WeaponTypeList" Collapsed="true">
-    <Position X="0.5" Y="2.5" Width="1.5" />
+    <Position X="0.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AACAAAAAAAAAAAAAIAAABAAAAAAAAAAAAAAAAAAAIAA=</HashCode>
       <FileName>WeaponTypeList.h</FileName>

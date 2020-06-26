@@ -135,27 +135,27 @@ protected:
 
 public:
 
-	int getClassCount() const {
+	int getSize() const {
 		return classlist.size();
 	}
 
-	Class extractClass(UINT pos) {
+	Class getClass(UINT pos) {
 		return classlist[pos];
 	}
 
-	Class extractClassPtr(UINT pos) const {
+	Class getClassPtr(UINT pos) const {
 		return classlist[pos];
 	}
 
-	std::unique_ptr<Stats> extractSelClassStats(HWND hwnd, HWND& listboxclasses) const {
+	std::unique_ptr<Stats> getSelClassStats(HWND hwnd, HWND& listboxclasses) const {
 		std::unique_ptr<Stats> selStats = std::make_unique<Stats>();
 		int pos = ListBox_GetCurSel(listboxclasses);
 		int len = ListBox_GetTextLen(listboxclasses, pos);				//get length of text in new current selection
 		const wchar_t* buffer = new const wchar_t[len];						//buffer variable 
 		ListBox_GetText(listboxclasses, pos, buffer);						//get text located in new current selection
 
-		for (int i = 0; i < getClassCount(); i++) {
-			Class cLass = extractClassPtr(i);
+		for (int i = 0; i < getSize(); i++) {
+			Class cLass = getClassPtr(i);
 
 			std::wstring name = cLass.getName();
 

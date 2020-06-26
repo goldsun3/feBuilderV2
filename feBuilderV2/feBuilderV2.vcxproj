@@ -165,7 +165,7 @@
     <ClInclude Include="ListViewWeaponStats.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="Roster.h" />
+    <ClInclude Include="StudentList.h" />
     <ClInclude Include="Stat.h" />
     <ClInclude Include="StatCalculator.h" />
     <ClInclude Include="Stats.h" />

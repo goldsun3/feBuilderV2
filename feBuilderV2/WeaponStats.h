@@ -26,18 +26,14 @@ public:
 		allStats.push_back(Stat(uUSes));
 	}
 
-	std::wstring extractStatText(UINT pos) {
-		std::wstring temp = allStats[pos].extractText();
+
+	std::vector<Stat> getAllStats() { return allStats; }
+	std::wstring getStatText(UINT pos) {
+		std::wstring temp = allStats[pos].getStat();
 		return temp;
 	}
 
-	std::vector<Stat> getStats() {
-		return allStats;
-	}
-
-	void augmentAllStats(std::vector<Stat> change) {
-		allStats = change;
-	}
+	void updateAllStats(std::vector<Stat> change) { allStats = change; }
 };
 
 #endif

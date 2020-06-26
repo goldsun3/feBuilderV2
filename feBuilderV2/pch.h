@@ -16,7 +16,7 @@
 #include "Class.h"
 #include "ClassList.h"
 #include "Student.h"
-#include "Roster.h"
+#include "StudentList.h"
 #include "ListViewTemplate.h"
 #include "ListBoxTemplate.h"
 #include "DropDownTemplate.h"

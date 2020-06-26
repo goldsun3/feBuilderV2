@@ -140,27 +140,27 @@ protected:
 	};		
 
 public:
-	int getWeaponCount () const {
+	int getSize () const {
 		return weaponlist.size();
 	}
 
-	Weapon extractWeapon(UINT pos) {
+	Weapon getWeapon(UINT pos) {
 		return weaponlist[pos];
 	}
 
-	Weapon extractWeaponPtr(UINT pos) const {
+	Weapon getWeaponPtr(UINT pos) const {
 		return weaponlist[pos];
 	}
 
-	std::unique_ptr<WeaponStats> extractSelWeaponStats(HWND& listboxweapons) const {
+	std::unique_ptr<WeaponStats> getSelWeaponStats(HWND& listboxweapons) const {
 		std::unique_ptr<WeaponStats> selStats = std::make_unique<WeaponStats>();
 		int pos = ListBox_GetCurSel(listboxweapons);
 		int len = ListBox_GetTextLen(listboxweapons, pos);				//get length of text in new current selection
 		const wchar_t* buffer = new const wchar_t[len];						//buffer variable 
 		ListBox_GetText(listboxweapons, pos, buffer);						//get text located in new current selection
 
-		for (int i = 0; i < getWeaponCount(); i++) {
-			Weapon weapon = extractWeaponPtr(i);
+		for (int i = 0; i < getSize(); i++) {
+			Weapon weapon = getWeaponPtr(i);
 
 			std::wstring name = weapon.getName();
 

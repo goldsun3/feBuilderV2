@@ -7,8 +7,10 @@ protected:
 public:
 	Stat() { stat = L""; }
 	Stat(std::wstring change) { stat = change; }
-	void Set(std::wstring change) { stat = change; }
-	std::wstring extractText() { return stat; }
+
+	void setStat(std::wstring change) { stat = change; }
+
+	std::wstring getStat() { return stat; }
 };
 
 #endif

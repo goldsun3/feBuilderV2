@@ -1,9 +1,9 @@
-#ifndef ROSTER_H
-#define ROSTER_H
+#ifndef STUDENTLIST_H
+#define STUDENTLIST_H
 
-class Roster {
+class StudentList {
 protected:
-	std::vector<Student> roster = {
+	std::vector<Student> studentlist = {
 		Student(L"Byleth",	   Stats(L"27", L"4", L"13",L"6",  L"9", L"8", L"8", L"6", L"6", L"7")),
 		Student(L"Hubert",	   Stats(L"22", L"4", L"6", L"12", L"6", L"7", L"6", L"4", L"7", L"8")),
 		Student(L"Linhardt",   Stats(L"24", L"4", L"5", L"10", L"6", L"5", L"7", L"5", L"9", L"3")),
@@ -44,21 +44,21 @@ protected:
 
 
 public:
-	Roster() {}
+	StudentList() {}
 
-	int getStudentCount() const { return roster.size(); }
-	Student extractStudent(UINT pos) { return roster[pos]; }
-	Student extractStudentPtr(UINT pos) const { return roster[pos]; }
+	int getSize() const { return studentlist.size(); }
+	Student getStudent(UINT pos) { return studentlist[pos]; }
+	Student getStudentPtr(UINT pos) const { return studentlist[pos]; }
 
-	std::unique_ptr<Stats> extractSelStudStats(HWND& listboxcharnames) {
+	std::unique_ptr<Stats> getSelStudStats(HWND& listboxcharnames) {
 		std::unique_ptr<Stats> selStats = std::make_unique<Stats>();
 		int pos = ListBox_GetCurSel(listboxcharnames);
 		int len = ListBox_GetTextLen(listboxcharnames, pos);				//get length of text in new current selection
 		const wchar_t* buffer = new const wchar_t[len];						//buffer variable 
 		ListBox_GetText(listboxcharnames, pos, buffer);						//get text located in new current selection;
 
-		for (int i = 0; i < getStudentCount(); i++) {
-			Student student = extractStudentPtr(i);
+		for (int i = 0; i < getSize(); i++) {
+			Student student = getStudentPtr(i);
 
 			std::wstring name = student.getName();
 			if (name.compare(buffer) == 0) {

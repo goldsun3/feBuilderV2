@@ -23,8 +23,8 @@ public:
 	}
 
 	void SetClassList(ClassList classlist) {
-		for (int i = 0; i < classlist.getClassCount(); ++i) {
-			Class cLass = classlist.extractClass(i);
+		for (int i = 0; i < classlist.getSize(); ++i) {
+			Class cLass = classlist.getClass(i);
 			std::wstring initbuffer = cLass.getName();
 			LPCTSTR lastbuffer = initbuffer.data();
 			ListBox_AddString(hListBox, lastbuffer);

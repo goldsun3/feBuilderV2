@@ -25,8 +25,8 @@ public:
 	}
 
 	void SetWeaponTypes(WeaponTypeList weapontypelist) {
-		for (int i = 0; i < weapontypelist.getWeaponTypeCount(); ++i) {
-			WeaponType weapontype = weapontypelist.extractWeaponType(i);
+		for (int i = 0; i < weapontypelist.getSize(); ++i) {
+			WeaponType weapontype = weapontypelist.getWeaponType(i);
 			std::wstring initbuffer = weapontype.getWeaponType();
 			LPCTSTR lastbuffer = &initbuffer[0];
 			ComboBox_AddString(hDropDown, lastbuffer);

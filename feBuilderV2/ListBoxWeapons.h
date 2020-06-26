@@ -23,8 +23,8 @@ public:
 	}
 
 	void SetWeaponList(WeaponList weaponlist) {
-		for (int i = 0; i < weaponlist.getWeaponCount(); ++i) {
-			Weapon weapon = weaponlist.extractWeapon(i);
+		for (int i = 0; i < weaponlist.getSize(); ++i) {
+			Weapon weapon = weaponlist.getWeapon(i);
 			std::wstring initbuffer = weapon.getName();
 			LPCTSTR lastbuffer = initbuffer.data();
 			ListBox_AddString(hListBox, lastbuffer);

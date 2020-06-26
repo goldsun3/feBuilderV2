@@ -3,7 +3,7 @@
 class Class
 {
 protected:
-	std::wstring name;
+	std::wstring name = L"";
 	Stats base;
 	Stats boosted;
 	//GrowthRate gr;

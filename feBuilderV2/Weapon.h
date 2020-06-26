@@ -3,8 +3,8 @@
 class Weapon
 {
 protected:
-	std::wstring name;
-	std::wstring weapontype;
+	std::wstring name = L"";
+	std::wstring weapontype = L"";
 	WeaponStats weaponstats;
 public:
 	Weapon() {}

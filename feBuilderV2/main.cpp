@@ -33,11 +33,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 	switch (msg) {
 
 		case WM_CREATE: {
-			Roster roster;
+			StudentList studentlist;
 
 			ListBoxCharNames listboxcharnames;
 			listboxcharnames.Construct(hwnd);
-			listboxcharnames.SetRoster(roster, hwnd);
+			listboxcharnames.SetRoster(studentlist, hwnd);
 
 			ClassList classlist;
 
@@ -87,9 +87,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 				case IDC_MAIN_LBCN: {
 					switch (HIWORD(wParam)) {
 						case LBN_SELCHANGE: {
-							Roster roster;
+							StudentList studentlist;
 							HWND listboxcharnames = GetDlgItem(hwnd, IDC_MAIN_LBCN);
-							charstats = roster.extractSelStudStats(listboxcharnames);
+							charstats = studentlist.getSelStudStats(listboxcharnames);
 							ListBox_SetCurSel(GetDlgItem(hwnd, IDC_MAIN_LBW), -1);
 							ListBox_SetCurSel(GetDlgItem(hwnd, IDC_MAIN_LBC), -1);
 							HWND listviewstats = GetDlgItem(hwnd, IDC_MAIN_LV);
@@ -107,13 +107,13 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 							if (ListBox_GetCurSel(GetDlgItem(hwnd, IDC_MAIN_LBCN)) != LB_ERR) {
 								HWND listboxcharnames = GetDlgItem(hwnd, IDC_MAIN_LBCN);
 
-								Roster roster;
-								charstats = roster.extractSelStudStats(listboxcharnames);
+								StudentList studentlist;
+								charstats = studentlist.getSelStudStats(listboxcharnames);
 
 								ClassList classlist;
 								HWND listboxclasses = GetDlgItem(hwnd, IDC_MAIN_LBC);
 
-								classstats = classlist.extractSelClassStats(hwnd, listboxclasses);
+								classstats = classlist.getSelClassStats(hwnd, listboxclasses);
 
 								HWND listviewstats = GetDlgItem(hwnd, IDC_MAIN_LV);
 								UpdateANDAugmentListViewStats(listviewstats, charstats.get(), classstats.get(), ledger.get());
@@ -132,7 +132,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 							HWND listboxweapons = GetDlgItem(hwnd, IDC_MAIN_LBW);
 
 							WeaponList weaponlist;
-							weaponstats = weaponlist.extractSelWeaponStats(listboxweapons);
+							weaponstats = weaponlist.getSelWeaponStats(listboxweapons);
 
 							HWND listviewweaponstats = GetDlgItem(hwnd, IDC_MAIN_LVW);
 							UpdateListViewWeaponStats(listviewweaponstats, weaponstats.get());
@@ -289,14 +289,14 @@ void UpdateListViewStats(HWND listviewstats, Stats* stats) {
 	LVITEM itemTemp;
 	itemTemp.mask = LVIF_TEXT;
 	itemTemp.iItem = 0;
-	std::wstring initbuffer = stats->extractStatText(0);
+	std::wstring initbuffer = stats->getStatText(0);
 	LPWSTR finalbuffer = &initbuffer[0];
 
 	itemTemp.pszText = finalbuffer;
 	ListView_InsertItem(listviewstats, &itemTemp);
 
 	for (int col = 0; col < C_LVS; col++) {
-		initbuffer = stats->extractStatText(col);
+		initbuffer = stats->getStatText(col);
 		finalbuffer = &initbuffer[0];
 
 		itemTemp.pszText = finalbuffer;
@@ -308,13 +308,13 @@ void UpdateListViewStats(HWND listviewstats, Stats* stats) {
 	UpdateListViewTotalStats(GetDlgItem(GetParent(listviewstats), IDC_MAIN_LVTS), stats, nullptr);
 }
 void UpdateANDAugmentListViewStats(HWND listviewstats, Stats* charstats, Stats* classstats, std::vector<statMeasure>* ledger) {
-	if (classstats->getBoolState() == true) {
+	if (classstats->getBase() == true) {
 		LVITEM itemTemp;
 		itemTemp.mask = LVIF_TEXT;
 		itemTemp.iItem = 0;
 
-		std::wstring chartext = charstats->extractStatText(0);
-		std::wstring classtext = classstats->extractStatText(0);
+		std::wstring chartext = charstats->getStatText(0);
+		std::wstring classtext = classstats->getStatText(0);
 		bool isBaseGrtr = CompareStats(chartext, classtext);
 
 		if (isBaseGrtr) {
@@ -334,8 +334,8 @@ void UpdateANDAugmentListViewStats(HWND listviewstats, Stats* charstats, Stats* 
 		}
 
 		for (int col = 1; col < C_LVS; col++) {
-			classtext = classstats->extractStatText(col);
-			chartext = charstats->extractStatText(col);
+			classtext = classstats->getStatText(col);
+			chartext = charstats->getStatText(col);
 			bool isBaseGrtr = CompareStats(chartext, classtext);
 
 			if (isBaseGrtr) {
@@ -364,13 +364,13 @@ void UpdateANDAugmentListViewStats(HWND listviewstats, Stats* charstats, Stats* 
 		UpdateListViewTotalStats(GetDlgItem(GetParent(listviewstats), IDC_MAIN_LVTS), charstats, nullptr);
 	}
 
-	else if (classstats->getBoolState() == false) {
+	else if (classstats->getBase() == false) {
 	LVITEM itemTemp;
 	itemTemp.mask = LVIF_TEXT;
 	itemTemp.iItem = 0;
 
-	std::wstring chartext = charstats->extractStatText(0);
-	std::wstring classtext = classstats->extractStatText(0);
+	std::wstring chartext = charstats->getStatText(0);
+	std::wstring classtext = classstats->getStatText(0);
 	std::wstring initbuffer = chartext + L" + " + classtext;
 	LPWSTR finalbuffer = &initbuffer[0];
 
@@ -378,8 +378,8 @@ void UpdateANDAugmentListViewStats(HWND listviewstats, Stats* charstats, Stats* 
 	ListView_InsertItem(listviewstats, &itemTemp);
 
 	for (int col = 0; col < C_LVS; col++) {
-		chartext = charstats->extractStatText(col);
-		classtext = classstats->extractStatText(col);
+		chartext = charstats->getStatText(col);
+		classtext = classstats->getStatText(col);
 		initbuffer = chartext + L" + " + classtext;
 		finalbuffer = &initbuffer[0];
 
@@ -396,14 +396,14 @@ void UpdateListViewWeaponStats(HWND listviewweaponstats, WeaponStats* weaponstat
 	LVITEM itemTemp;
 	itemTemp.mask = LVIF_TEXT;
 	itemTemp.iItem = 0;
-	std::wstring initbuffer = weaponstats->extractStatText(0);
+	std::wstring initbuffer = weaponstats->getStatText(0);
 	LPWSTR finalbuffer = &initbuffer[0];
 
 	itemTemp.pszText = finalbuffer;
 	ListView_InsertItem(listviewweaponstats, &itemTemp);
 
 	for (int col = 0; col < C_LVWS; col++) {
-		initbuffer = weaponstats->extractStatText(col);
+		initbuffer = weaponstats->getStatText(col);
 		finalbuffer = &initbuffer[0];
 
 		itemTemp.pszText = finalbuffer;
@@ -427,19 +427,19 @@ void UpdateListBoxWeapons(HWND listboxweapons, HWND dropdownweapontypes, WeaponL
 	ComboBox_GetLBText(dropdownweapontypes, ComboBox_GetCurSel(dropdownweapontypes), bufferDDWTSel);  //get weapon name that's selected
 
 	if (wcscmp(bufferDDWTSel, L"ALL") == 0){
-		for (int index = 0; index < weaponlist.getWeaponCount (); index++) {				//go through the listbox with weapon names
-			std::wstring weaponname = weaponlist.extractWeapon (index).getName ();
+		for (int index = 0; index < weaponlist.getSize (); index++) {				//go through the listbox with weapon names
+			std::wstring weaponname = weaponlist.getWeapon (index).getName ();
 			LPCTSTR wordtoinsert = &weaponname [0];
 			int error = ListBox_AddString (listboxweapons, wordtoinsert);
 		}
 	}
 	else{
-		for (int index = 0; index < weaponlist.getWeaponCount(); index++) {				//go through the listbox with weapon names
+		for (int index = 0; index < weaponlist.getSize(); index++) {				//go through the listbox with weapon names
 		
-			std::wstring weapontype = weaponlist.extractWeapon(index).getWeaponType();  //load up weapon from listbox that matches index 
+			std::wstring weapontype = weaponlist.getWeapon(index).getWeaponType();  //load up weapon from listbox that matches index 
 
 			if (weapontype.compare(bufferDDWTSel) == 0) {
-				std::wstring weaponname = weaponlist.extractWeapon(index).getName();
+				std::wstring weaponname = weaponlist.getWeapon(index).getName();
 				LPCTSTR wordtoinsert = &weaponname[0];
 				int error = ListBox_AddString(listboxweapons, wordtoinsert);
 			}
@@ -464,14 +464,14 @@ void UpdateListViewTotalStats(HWND listviewtotalstats, Stats* stats, WeaponStats
 	LVITEM itemTemp;
 	itemTemp.mask = LVIF_TEXT;
 	itemTemp.iItem = 0;
-	std::wstring initbuffer = (statcalculator.getTotalStats().getStats())[0].extractText();
+	std::wstring initbuffer = (statcalculator.getTotalStats().getAllStats())[0].getStat();
 	LPWSTR finalbuffer = &initbuffer [0];
 
 	itemTemp.pszText = finalbuffer;
 	ListView_InsertItem(listviewtotalstats, &itemTemp);
 
 	for (int col = 0; col < C_LVTS; col++) {
-		initbuffer = (statcalculator.getTotalStats().getStats())[col].extractText();
+		initbuffer = (statcalculator.getTotalStats().getAllStats())[col].getStat();
 		finalbuffer = &initbuffer [0];
 
 		itemTemp.pszText = finalbuffer;

@@ -33,20 +33,16 @@ public:
 		allStats.push_back(Stat(uRES));
 		allStats.push_back(Stat(uCHA));
 	}
-
 	void setBase(bool change) { base = change; }
-	std::vector<Stat> getStats() {
-		return allStats;
-	}
-	void augmentAllStats(std::vector<Stat> change) {
-		allStats = change;
-	}
-	std::wstring extractStatText(UINT pos) {
-		std::wstring temp = allStats[pos].extractText();
+
+	std::vector<Stat> getAllStats() { return allStats; }
+	bool getBase() { return base; }
+	std::wstring getStatText(UINT pos) {
+		std::wstring temp = allStats[pos].getStat();
 		return temp;
 	}
 
-	bool getBoolState() { return base; }
+	void updateAllStats(std::vector<Stat> change) { allStats = change; }
 };
 
 #endif
