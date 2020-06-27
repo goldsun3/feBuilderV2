@@ -107,6 +107,9 @@
     <ClInclude Include="CharacterStats.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ClassStats.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="feBuilderV2.rc">

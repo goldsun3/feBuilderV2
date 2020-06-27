@@ -29,7 +29,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="ClassList" Collapsed="true">
-    <Position X="10.75" Y="3.5" Width="1.5" />
+    <Position X="12.75" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAgAIAAAIAAAAAIAIAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ClassList.h</FileName>
@@ -106,7 +106,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="StudentList" Collapsed="true">
-    <Position X="12.5" Y="3.5" Width="1.5" />
+    <Position X="10.75" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAgAAAAAAIAAgAAAAAAAAAAAAAEAAEAAAIAAAAAAAAA=</HashCode>
       <FileName>StudentList.h</FileName>
@@ -127,7 +127,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Student" Collapsed="true">
-    <Position X="12.5" Y="2.5" Width="1.5" />
+    <Position X="10.75" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAEQAAAQQAAAAAAAAAAAAAAAAAAEAABAAAAEAAACAAA=</HashCode>
       <FileName>Student.h</FileName>
@@ -155,7 +155,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="WeaponStats" Collapsed="true">
-    <Position X="8.75" Y="1.5" Width="1.75" />
+    <Position X="7" Y="1.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAA=</HashCode>
       <FileName>WeaponStats.h</FileName>
@@ -176,7 +176,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="CharacterStats" Collapsed="true">
-    <Position X="10.75" Y="1.5" Width="1.5" />
+    <Position X="9" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ACBAAAAAAAAABEAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CharacterStats.h</FileName>
@@ -187,6 +187,13 @@
     <TypeIdentifier>
       <HashCode>gAIAAAAQAIAAAgAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>StatsTemplate.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ClassStats" Collapsed="true">
+    <Position X="10.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ClassStats.h</FileName>
     </TypeIdentifier>
   </Class>
   <Struct Name="statMeasure" Collapsed="true">

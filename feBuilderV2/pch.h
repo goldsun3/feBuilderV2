@@ -7,6 +7,7 @@
 #include "resource.h"
 #include "Stat.h"
 #include "StatsTemplate.h"
+#include "ClassStats.h"
 #include "CharacterStats.h"
 #include "WeaponStats.h"
 #include "TotalStats.h"
