@@ -5,8 +5,8 @@ class Student
 {
 protected:
 	std::wstring name = L"";
-	Stats		 stats;
-	Class		 cLass;
+	CharacterStats stats;
+	Class cLass;
 	//Crest		 crest;
 	//Skills	 skills;
 
@@ -15,16 +15,16 @@ protected:
 	//Spells	 spells;
 public:
 	Student() {}
-	Student(std::wstring uNAME, Stats uALLSTATS) {
+	Student(std::wstring uNAME, CharacterStats uALLSTATS) {
 		setName(uNAME);
 		setStats(uALLSTATS);
 	}
 
 	void setName(std::wstring uNAME) { name = uNAME; }
-	void setStats(Stats uALLSTATS) { stats = uALLSTATS; }
+	void setStats(CharacterStats uALLSTATS) { stats = uALLSTATS; }
 
 	std::wstring getName() { return name; }
-	Stats getStats() { return stats; }
+	CharacterStats getStats() { return stats; }
 };
 
 #endif

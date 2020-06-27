@@ -15,15 +15,15 @@ struct statMeasure {
 class StatCalculator
 {
 protected:
-	Stats		studentstats;
+	CharacterStats studentstats;
 	WeaponStats weaponstats;
-	TotalStats	totalstats = { L"0" , L"0" , L"0" , L"0" , L"0" , L"0" , L"0" , L"0" , L"0" , L"0" , L"0" };
+	TotalStats totalstats = { L"0" , L"0" , L"0" , L"0" , L"0" , L"0" , L"0" , L"0" , L"0" , L"0" , L"0" };
 public:
 	StatCalculator(){
-		studentstats = Stats(L"0", L"0", L"0", L"0", L"0", L"0", L"0", L"0", L"0", L"0");
+		studentstats = CharacterStats(L"0", L"0", L"0", L"0", L"0", L"0", L"0", L"0", L"0", L"0");
 		weaponstats = WeaponStats(L"0", L"0", L"0", L"0", L"0", L"0", L"0");
 	}
-	void setStats(Stats* stats, WeaponStats* wpnstats, std::vector<statMeasure>* ledger) {
+	void setStats(CharacterStats* stats, WeaponStats* wpnstats, std::vector<statMeasure>* ledger) {
 		if (stats != nullptr){
 			std::vector<Stat> temp = studentstats.getAllStats();
 			temp.at(0).setStat(stats->getStatText(0));

@@ -2,29 +2,16 @@
 
 LPCWSTR g_szClassName{ L"My Window Class" };
 
-//struct statMeasure {
-//	std::wstring name = L"";
-//	bool change = false;
-//
-//	statMeasure(std::wstring uName, bool uChange) {
-//		name = uName;
-//		change = uChange;
-//	}
-//	bool getChange() { return change; }
-//};
-
-void UpdateListViewStats(HWND listviewstats, Stats* stats);
-void UpdateANDAugmentListViewStats(HWND listviewstats, Stats* charstats, Stats* classstats, std::vector<statMeasure>* ledger);
+void UpdateListViewStats(HWND listviewstats, CharacterStats* stats);
+void UpdateANDAugmentListViewStats(HWND listviewstats, CharacterStats* charstats, CharacterStats* classstats, std::vector<statMeasure>* ledger);
 void UpdateListViewWeaponStats(HWND listviewweaponstats, WeaponStats* weaponstats);
 bool CompareStats(std::wstring chartext, std::wstring classtext);
 void UpdateListBoxWeapons(HWND listboxweapons, HWND dropdownweapontypes, WeaponList weaponlist);
-void UpdateListViewTotalStats(HWND hwnd, Stats* stats, WeaponStats* weaponstats, std::vector<statMeasure>* ledger);
-
-
+void UpdateListViewTotalStats(HWND hwnd, CharacterStats* stats, WeaponStats* weaponstats, std::vector<statMeasure>* ledger);
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
-	std::unique_ptr<Stats> charstats(new Stats);
-	std::unique_ptr<Stats> classstats(new Stats);
+	std::unique_ptr<CharacterStats> charstats(new CharacterStats);
+	std::unique_ptr<CharacterStats> classstats(new CharacterStats);
 	std::unique_ptr<WeaponStats> weaponstats(new WeaponStats);
 	static std::unique_ptr<std::vector<statMeasure>> ledger (new std::vector<statMeasure>);
 	switch (msg) {
@@ -282,7 +269,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	return Msg.wParam;
 }
 
-void UpdateListViewStats(HWND listviewstats, Stats* stats) {
+void UpdateListViewStats(HWND listviewstats, CharacterStats* stats) {
 	LVITEM itemTemp;
 	itemTemp.mask = LVIF_TEXT;
 	itemTemp.iItem = 0;
@@ -304,7 +291,7 @@ void UpdateListViewStats(HWND listviewstats, Stats* stats) {
 	GetDlgItem(GetParent(listviewstats), IDC_MAIN_LVTS);
 	UpdateListViewTotalStats(GetDlgItem(GetParent(listviewstats), IDC_MAIN_LVTS), stats, nullptr, nullptr);
 }
-void UpdateANDAugmentListViewStats(HWND listviewstats, Stats* charstats, Stats* classstats, std::vector<statMeasure>* ledger) {
+void UpdateANDAugmentListViewStats(HWND listviewstats, CharacterStats* charstats, CharacterStats* classstats, std::vector<statMeasure>* ledger) {
 	if (classstats->getBase() == true) {
 		LVITEM itemTemp;
 		itemTemp.mask = LVIF_TEXT;
@@ -444,7 +431,7 @@ void UpdateListBoxWeapons(HWND listboxweapons, HWND dropdownweapontypes, WeaponL
 		}
 	}
 }
-void UpdateListViewTotalStats(HWND listviewtotalstats, Stats* stats, WeaponStats* weaponstats, std::vector<statMeasure>* ledger) {
+void UpdateListViewTotalStats(HWND listviewtotalstats, CharacterStats* stats, WeaponStats* weaponstats, std::vector<statMeasure>* ledger) {
 	static StatCalculator statcalculator;
 	statcalculator.setStats(stats, weaponstats, ledger);
 	statcalculator.CalculateTotalPhysicalAttack();

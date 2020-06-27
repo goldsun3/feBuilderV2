@@ -4,8 +4,8 @@ class Class
 {
 protected:
 	std::wstring name = L"";
-	Stats base;
-	Stats boosted;
+	CharacterStats base;
+	CharacterStats boosted;
 	//GrowthRate gr;
 	//skill level bonuses
 	//ability unlocks
@@ -13,19 +13,19 @@ protected:
 	//which tier within class hierarchy class it is in
 public:
 	Class() {}
-	Class(std::wstring uName, Stats uStats, Stats uBoosted) {
+	Class(std::wstring uName, CharacterStats uStats, CharacterStats uBoosted) {
 		setName(uName);
 		setBase(uStats);
 		setBoosted(uBoosted);
 	}
 
 	void setName(std::wstring change) { name = change; }
-	void setBase(Stats change) { base = change; }
-	void setBoosted(Stats change) { boosted = change; }
+	void setBase(CharacterStats change) { base = change; }
+	void setBoosted(CharacterStats change) { boosted = change; }
 
 	std::wstring getName() { return name; }
-	Stats getBase() { return base; }
-	Stats getBoosted() { return boosted; }
+	CharacterStats getBase() { return base; }
+	CharacterStats getBoosted() { return boosted; }
 };
 
 #endif
