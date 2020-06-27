@@ -1,26 +1,24 @@
 #ifndef WEAPON_H
 #define WEAPON_H
-class Weapon
-{
+class Weapon : public WeaponStats, public WeaponType{
 protected:
 	std::wstring name = L"";
-	std::wstring weapontype = L"";
-	WeaponStats weaponstats;
 public:
-	Weapon() {}
-	Weapon(std::wstring uName, std::wstring uWeaponType, WeaponStats uStats) {
+	Weapon() : WeaponStats(), WeaponType() {}
+	Weapon(std::wstring uName, std::wstring uWeaponType, std::wstring uMight, std::wstring uHit, std::wstring uCrit,
+			std::wstring uRange, std::wstring uWeight, std::wstring uSkillLVL,
+			std::wstring uUses) : 
+		WeaponStats(uMight, uHit, uCrit,
+					uRange, uWeight, uSkillLVL,
+					uUses), 
+		WeaponType(uWeaponType)
+	{
 		setName(uName);
-		setWeaponType(uWeaponType);
-		setStats(uStats);
 	}
 
 	void setName(std::wstring change) { name = change; }
-	void setWeaponType(std::wstring change) { weapontype = change; }
-	void setStats(WeaponStats change) { weaponstats = change; }
 
 	std::wstring getName() { return name; }
-	std::wstring getWeaponType() { return weapontype; }
-	WeaponStats getStats() { return weaponstats; }
 };
 
 #endif

@@ -62,9 +62,6 @@
     <ClInclude Include="Stat.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Student.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Weapon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -98,9 +95,6 @@
     <ClInclude Include="TotalStats.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="StudentList.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="StatsTemplate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -108,6 +102,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ClassStats.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

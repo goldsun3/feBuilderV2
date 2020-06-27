@@ -1,7 +1,6 @@
 #ifndef WEAPONTYPELIST_H
 #define WEAPONTYPELIST_H
-class WeaponTypeList
-{
+class WeaponTypeList : public WeaponType {
 protected:
 	std::vector<WeaponType> weapontypelist = {
 		WeaponType (L"Sword"),
@@ -14,6 +13,7 @@ protected:
 		WeaponType (L"White Magic")
 	};
 public:
+	WeaponTypeList() {}
 	int getSize() const {
 		return weapontypelist.size();
 	}

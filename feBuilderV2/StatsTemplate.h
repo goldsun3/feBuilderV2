@@ -1,7 +1,7 @@
 #ifndef STATSTEMPLATE_H
 #define STATSTEMPLATE_H
 
-class StatsTemplate{
+class StatsTemplate : public Stat{
 protected:
 	std::vector<Stat> allStats;
 public:

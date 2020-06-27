@@ -15,32 +15,32 @@ struct statMeasure {
 class StatCalculator
 {
 protected:
-	CharacterStats studentstats;
-	WeaponStats weaponstats;
+	CharacterStats charstats;
+	WeaponStats wpnstats;
 	TotalStats totalstats = { L"0" , L"0" , L"0" , L"0" , L"0" , L"0" , L"0" , L"0" , L"0" , L"0" , L"0" };
 public:
 	StatCalculator(){
-		studentstats = CharacterStats(L"0", L"0", L"0", L"0", L"0", L"0", L"0", L"0", L"0", L"0");
-		weaponstats = WeaponStats(L"0", L"0", L"0", L"0", L"0", L"0", L"0");
+		charstats = CharacterStats(L"0", L"0", L"0", L"0", L"0", L"0", L"0", L"0", L"0", L"0");
+		wpnstats = WeaponStats(L"0", L"0", L"0", L"0", L"0", L"0", L"0");
 	}
-	void setStats(CharacterStats* stats, WeaponStats* wpnstats, std::vector<statMeasure>* ledger) {
-		if (stats != nullptr){
-			std::vector<Stat> temp = studentstats.getAllStats();
-			temp.at(0).setStat(stats->getStatText(0));
-			temp.at(1).setStat(stats->getStatText(1));
-			temp.at(2).setStat(stats->getStatText(2));
-			temp.at(3).setStat(stats->getStatText(3));
-			temp.at(4).setStat(stats->getStatText(4));
-			temp.at(5).setStat(stats->getStatText(5));
-			temp.at(6).setStat(stats->getStatText(6));
-			temp.at(7).setStat(stats->getStatText(7));
-			temp.at(8).setStat(stats->getStatText(8));
-			temp.at(9).setStat(stats->getStatText(9));
-			studentstats.updateAllStats(temp);
+	void setStats(std::vector<Stat>* characterstats, WeaponStats* weaponstats, std::vector<statMeasure>* ledger) {
+		if (characterstats != nullptr){
+			std::vector<Stat> temp = *characterstats;
+			temp.at(0).setStat(characterstats->at(0).getStat());
+			temp.at(1).setStat(characterstats->at(1).getStat());
+			temp.at(2).setStat(characterstats->at(2).getStat());
+			temp.at(3).setStat(characterstats->at(3).getStat());
+			temp.at(4).setStat(characterstats->at(4).getStat());
+			temp.at(5).setStat(characterstats->at(5).getStat());
+			temp.at(6).setStat(characterstats->at(6).getStat());
+			temp.at(7).setStat(characterstats->at(7).getStat());
+			temp.at(8).setStat(characterstats->at(8).getStat());
+			temp.at(9).setStat(characterstats->at(9).getStat());
+			charstats.updateAllStats(temp);
 		}
 
 		if (ledger != nullptr) {
-			std::vector<Stat> temp = studentstats.getAllStats();
+			std::vector<Stat> temp = *characterstats;
 			temp.at(0).setStat(ledger->at(0).getStat());
 			temp.at(1).setStat(ledger->at(1).getStat());
 			temp.at(2).setStat(ledger->at(2).getStat());
@@ -51,25 +51,25 @@ public:
 			temp.at(7).setStat(ledger->at(7).getStat());
 			temp.at(8).setStat(ledger->at(8).getStat());
 			temp.at(9).setStat(ledger->at(9).getStat());
-			studentstats.updateAllStats(temp);
+			charstats.updateAllStats(temp);
 		}
 
-		if (wpnstats != nullptr) {
-			std::vector<Stat> temp = weaponstats.getAllStats();
-			temp.at(0).setStat(wpnstats->getStatText(0));
-			temp.at(1).setStat(wpnstats->getStatText(1));
-			temp.at(2).setStat(wpnstats->getStatText(2));
-			temp.at(3).setStat(wpnstats->getStatText(3));
-			temp.at(4).setStat(wpnstats->getStatText(4));
-			temp.at(5).setStat(wpnstats->getStatText(5));
-			temp.at(6).setStat(wpnstats->getStatText(6));
-			weaponstats.updateAllStats(temp);
+		if (weaponstats != nullptr) {
+			std::vector<Stat> temp = weaponstats->getAllStats();
+			temp.at(0).setStat(weaponstats->getAllStats().at(0).getStat());
+			temp.at(1).setStat(weaponstats->getAllStats().at(1).getStat());
+			temp.at(2).setStat(weaponstats->getAllStats().at(2).getStat());
+			temp.at(3).setStat(weaponstats->getAllStats().at(3).getStat());
+			temp.at(4).setStat(weaponstats->getAllStats().at(4).getStat());
+			temp.at(5).setStat(weaponstats->getAllStats().at(5).getStat());
+			temp.at(6).setStat(weaponstats->getAllStats().at(6).getStat());
+			wpnstats.updateAllStats(temp);
 		}
 	}
 	void CalculateTotalPhysicalAttack() {
 		std::vector<Stat> change = totalstats.getAllStats();
-		std::wstring buffer = std::to_wstring(std::stoi(studentstats.getStatText(2))
-										  + std::stoi(weaponstats.getStatText(0))
+		std::wstring buffer = std::to_wstring(std::stoi(charstats.getStatText(2))
+										  + std::stoi(wpnstats.getStatText(0))
 											/*+ ifEffective(Weapon Might x3)
 											+ Combat Art 
 											+ Skills 
@@ -82,8 +82,8 @@ public:
 	}
 	void CalculateTotalMagicAttack() {
 		std::vector<Stat> change = totalstats.getAllStats();
-		std::wstring buffer = std::to_wstring (std::stoi(studentstats.getStatText(3))
-										   + std::stoi(weaponstats.getStatText(0))
+		std::wstring buffer = std::to_wstring (std::stoi(charstats.getStatText(3))
+										   + std::stoi(wpnstats.getStatText(0))
 											/*+ ifEffective(Weapon Might x3)
 											+ Combat Art
 											+ Skills
@@ -97,8 +97,8 @@ public:
 	}
 	void CalculateTotalPhysicalHit() {
 		std::vector<Stat> change = totalstats.getAllStats();
-		std::wstring buffer = std::to_wstring(std::stoi(studentstats.getStatText(4))
-										  + std::stoi(weaponstats.getStatText(1))
+		std::wstring buffer = std::to_wstring(std::stoi(charstats.getStatText(4))
+										  + std::stoi(wpnstats.getStatText(1))
 										/*+ Combat Art
 										+ Skills
 										+/- Battalions
@@ -110,9 +110,9 @@ public:
 	}
 	void CalculateTotalMagicHit() {
 		std::vector<Stat> change = totalstats.getAllStats();
-		std::wstring buffer = std::to_wstring ((std::stoi(studentstats.getStatText(4)) / 2)
-										   + (std::stoi(studentstats.getStatText(6)) / 2)
-											+ std::stoi(weaponstats.getStatText(1))
+		std::wstring buffer = std::to_wstring ((std::stoi(charstats.getStatText(4)) / 2)
+										   + (std::stoi(charstats.getStatText(6)) / 2)
+											+ std::stoi(wpnstats.getStatText(1))
 										/*+ Skills
 										+/- Battalions
 										+ Linked attacks
@@ -122,22 +122,22 @@ public:
 	}
 	void CalculateTotalCrit() {
 		std::vector<Stat> change = totalstats.getAllStats();
-		std::wstring buffer = std::to_wstring(((std::stoi(studentstats.getStatText(4)) + std::stoi(studentstats.getStatText(6))) / 2)
-										    + std::stoi(weaponstats.getStatText(2))
+		std::wstring buffer = std::to_wstring(((std::stoi(charstats.getStatText(4)) + std::stoi(charstats.getStatText(6))) / 2)
+										    + std::stoi(wpnstats.getStatText(2))
 											/*+Skills*/);
 		change.at(4).setStat(buffer);
 		totalstats.updateAllStats(change);
 	}
 	void CalculateAS() {
 		std::vector<Stat> change = totalstats.getAllStats();
-		std::wstring buffer = std::to_wstring(std::stoi(studentstats.getStatText(5))
-										+ ((std::stoi(weaponstats.getStatText(4)) - std::stoi(weaponstats.getStatText(2))) / 5));
+		std::wstring buffer = std::to_wstring(std::stoi(charstats.getStatText(5))
+										+ ((std::stoi(wpnstats.getStatText(4)) - std::stoi(wpnstats.getStatText(2))) / 5));
 		change.at(5).setStat(buffer);
 		totalstats.updateAllStats(change);
 	}
 	void CalculateTotalProt() {
 		std::vector<Stat> change = totalstats.getAllStats();
-		std::wstring buffer = std::to_wstring(std::stoi(studentstats.getStatText(7))
+		std::wstring buffer = std::to_wstring(std::stoi(charstats.getStatText(7))
 											/*+/- Battalions
 											+ Equipment*/);
 		change.at(6).setStat(buffer);
@@ -145,7 +145,7 @@ public:
 	}
 	void CalculateTotalResilience() {
 		std::vector<Stat> change = totalstats.getAllStats();
-		std::wstring buffer = std::to_wstring(std::stoi(studentstats.getStatText(8))
+		std::wstring buffer = std::to_wstring(std::stoi(charstats.getStatText(8))
 											/*+/- Battalions
 											+ Equipment*/);
 		change.at(7).setStat(buffer);
@@ -162,15 +162,15 @@ public:
 	}
 	void CalculateTotalCritAvoid() {
 		std::vector<Stat> change = totalstats.getAllStats();
-		std::wstring buffer = std::to_wstring(std::stoi(weaponstats.getStatText(2))
-										  - std::stoi(studentstats.getStatText(6)));
+		std::wstring buffer = std::to_wstring(std::stoi(wpnstats.getStatText(2))
+										  - std::stoi(charstats.getStatText(6)));
 
 		change.at(9).setStat(buffer);
 		totalstats.updateAllStats(change);
 	}
 	void CalculateTotalRange() {
 		std::vector<Stat> change = totalstats.getAllStats();
-		std::wstring buffer = weaponstats.getStatText(3);
+		std::wstring buffer = wpnstats.getStatText(3);
 
 		change.at(10).setStat(buffer);
 		totalstats.updateAllStats(change);

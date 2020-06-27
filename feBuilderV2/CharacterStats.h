@@ -3,7 +3,6 @@
 class CharacterStats : public StatsTemplate{
 protected:
 	//HP, MOVEMENT, STRENGTH, MAGIC, DEXTERITY, SPEED, LUCK, DEFENSE, RESISTANCE, CHARM
-	bool base = true;
 public:
 	CharacterStats() : StatsTemplate() {}
 	CharacterStats(std::wstring uHP, std::wstring uMOV, std::wstring uSTR,
@@ -15,9 +14,6 @@ public:
 						uLCK, uDEF, uRES, 
 						uCHA) 
 	{}
-
-	void setBase(bool change) { base = change; }
-	bool getBase() { return base; }
 };
 
 #endif

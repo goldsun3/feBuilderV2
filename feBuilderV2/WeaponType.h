@@ -4,7 +4,7 @@ class WeaponType{
 protected:
 	std::wstring weapontype = L"";
 public:
-	WeaponType() { weapontype = L""; }
+	WeaponType() {}
 	WeaponType(std::wstring uWeaponType) { weapontype = uWeaponType; }
 
 	void setWeaponType(std::wstring change) { weapontype = change; }

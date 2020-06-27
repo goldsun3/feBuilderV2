@@ -23,10 +23,10 @@ public:
 		}
 	}
 
-	void SetRoster(StudentList studentlist, HWND hwnd) {
-		for (int i = 0; i < studentlist.getSize(); ++i) {
-			Student student = studentlist.getStudent(i);
-			std::wstring initbuffer = student.getName();
+	void SetCharacterList(CharacterList characterlist, HWND hwnd) {
+		for (int i = 0; i < characterlist.getSize(); ++i) {
+			Character character = characterlist.getCharacter(i);
+			std::wstring initbuffer = character.getName();
 			LPCTSTR lastbuffer = &initbuffer[0];
 			ListBox_AddString(hListBox, lastbuffer);
 		}

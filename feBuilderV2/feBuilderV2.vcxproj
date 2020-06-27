@@ -151,6 +151,8 @@
     <ClInclude Include="ButtonClassBaseStats.h" />
     <ClInclude Include="ButtonClassBoostedStats.h" />
     <ClInclude Include="ButtonTemplate.h" />
+    <ClInclude Include="Character.h" />
+    <ClInclude Include="CharacterList.h" />
     <ClInclude Include="Class.h" />
     <ClInclude Include="ClassList.h" />
     <ClInclude Include="ClassStats.h" />
@@ -167,11 +169,9 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="StatsTemplate.h" />
-    <ClInclude Include="StudentList.h" />
     <ClInclude Include="Stat.h" />
     <ClInclude Include="StatCalculator.h" />
     <ClInclude Include="CharacterStats.h" />
-    <ClInclude Include="Student.h" />
     <ClInclude Include="TotalStats.h" />
     <ClInclude Include="Weapon.h" />
     <ClInclude Include="WeaponList.h" />

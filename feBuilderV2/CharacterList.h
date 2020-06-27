@@ -1,68 +1,68 @@
-#ifndef STUDENTLIST_H
-#define STUDENTLIST_H
+#ifndef CHARACTERLIST_H
+#define CHARACTERLIST_H
 
-class StudentList {
+class CharacterList : public Character{
 protected:
-	std::vector<Student> studentlist = {
-		Student(L"Byleth",	   CharacterStats(L"27", L"4", L"13",L"6",  L"9", L"8", L"8", L"6", L"6", L"7")),
-		Student(L"Hubert",	   CharacterStats(L"22", L"4", L"6", L"12", L"6", L"7", L"6", L"4", L"7", L"8")),
-		Student(L"Linhardt",   CharacterStats(L"24", L"4", L"5", L"10", L"6", L"5", L"7", L"5", L"9", L"3")),
-		Student(L"Caspar",     CharacterStats(L"26", L"4", L"9", L"3",  L"5", L"6", L"8", L"6", L"2", L"4")),
-		Student(L"Bernadetta", CharacterStats(L"25", L"4", L"8", L"5",  L"7", L"7", L"5", L"4", L"2", L"6")),
-		Student(L"Dorothea",   CharacterStats(L"24", L"4", L"5", L"11", L"6", L"7", L"6", L"4", L"7", L"8")),
-		Student(L"Petra",	   CharacterStats(L"25", L"4", L"9", L"3",  L"7", L"10",L"7", L"5", L"2", L"6")),
-		Student(L"Dimitri",    CharacterStats(L"28", L"4", L"12",L"4",  L"7", L"7", L"5", L"7", L"4", L"9")),
-		Student(L"Dedue",	   CharacterStats(L"30", L"4", L"12",L"2",  L"5", L"7", L"5", L"8", L"1", L"4")),
-		Student(L"Felix",	   CharacterStats(L"26", L"4", L"10",L"5",  L"6", L"9", L"5", L"5", L"3", L"5")),
-		Student(L"Ashe",	   CharacterStats(L"23", L"4", L"8", L"5",  L"8", L"9", L"6", L"5", L"6", L"5")),
-		Student(L"Sylvain",	   CharacterStats(L"27", L"4", L"9", L"5",  L"5", L"8", L"6", L"6", L"2", L"7")),
-		Student(L"Mercedes",   CharacterStats(L"25", L"4", L"6", L"10", L"6", L"8", L"5", L"5", L"9", L"8")),
-		Student(L"Annette",	   CharacterStats(L"23", L"4", L"6", L"11", L"7", L"7", L"6", L"5", L"4", L"6")),
-		Student(L"Ingrid",	   CharacterStats(L"27", L"4", L"8", L"6",  L"6", L"8", L"6", L"5", L"8", L"8")),
-		Student(L"Claude",	   CharacterStats(L"26", L"4", L"11",L"5",  L"8", L"8", L"7", L"6", L"4", L"8")),
-		Student(L"Lorenz",	   CharacterStats(L"28", L"4", L"8", L"7",  L"6", L"7", L"5", L"6", L"6", L"3")),
-		Student(L"Raphael",	   CharacterStats(L"30", L"4", L"11",L"3",  L"5", L"6", L"6", L"7", L"1", L"4")),
-		Student(L"Ignatz",	   CharacterStats(L"25", L"4", L"8", L"5",  L"7", L"8", L"8", L"4", L"6", L"4")),
-		Student(L"Lysithea",   CharacterStats(L"22", L"4", L"4", L"11", L"7", L"7", L"4", L"3", L"4", L"5")),
-		Student(L"Marianne",   CharacterStats(L"23", L"4", L"5", L"11", L"6", L"7", L"6", L"4", L"8", L"7")),
-		Student(L"Hilda",	   CharacterStats(L"29", L"4", L"10",L"5",  L"5", L"8", L"6", L"6", L"3", L"7")),
-		Student(L"Leonie",	   CharacterStats(L"26", L"4", L"9", L"5",  L"8", L"9", L"6", L"7", L"2", L"7")),
-		Student(L"Flayn",	   CharacterStats(L"24", L"4", L"6", L"9",  L"6", L"5", L"4", L"5", L"10",L"9")),
-		Student(L"Hanneman",   CharacterStats(L"25", L"4", L"6", L"10", L"6", L"6", L"4", L"5", L"7", L"5")),
-		Student(L"Manuela",	   CharacterStats(L"26", L"4", L"10",L"8",  L"6", L"8", L"6", L"5", L"4", L"7")),
-		Student(L"Gilbert",	   CharacterStats(L"30", L"4", L"9", L"4",  L"6", L"5", L"4", L"5", L"2", L"6")),
-		Student(L"Alois",	   CharacterStats(L"28", L"4", L"9", L"4",  L"5", L"6", L"5", L"5", L"2", L"7")),
-		Student(L"Catherine",  CharacterStats(L"27", L"4", L"8", L"5",  L"6", L"7", L"6", L"5", L"2", L"4")),
-		Student(L"Shamir",	   CharacterStats(L"26", L"4", L"8", L"4",  L"7", L"6", L"8", L"5", L"2", L"6")),
-		Student(L"Cyril",	   CharacterStats(L"24", L"4", L"7", L"4",  L"6", L"6", L"6", L"5", L"2", L"4")),
-		Student(L"Jeritza",	   CharacterStats(L"30", L"4", L"8", L"6",  L"6", L"8", L"4", L"7", L"5", L"3")),
-		Student(L"Anna",	   CharacterStats(L"26", L"4", L"7", L"7",  L"7", L"7", L"7", L"5", L"7", L"7")),
-		Student(L"Yuri",	   CharacterStats(L"24", L"4", L"10",L"6",  L"7", L"9", L"7", L"5", L"7", L"8")),
-		Student(L"Balthus",    CharacterStats(L"28", L"4", L"11",L"5",  L"4", L"7", L"3", L"7", L"4", L"4")),
-		Student(L"Constance",  CharacterStats(L"23", L"4", L"5", L"11", L"6", L"6", L"4", L"3", L"4", L"6")),
-		Student(L"Hapi",	   CharacterStats(L"26", L"4", L"6", L"11", L"8", L"6", L"4", L"4", L"7", L"4")) };
+	std::vector<Character> characterlist = {
+		Character(L"Byleth",	   L"27", L"4", L"13",L"6",  L"9", L"8", L"8", L"6", L"6", L"7"),
+		Character(L"Hubert",	   L"22", L"4", L"6", L"12", L"6", L"7", L"6", L"4", L"7", L"8"),
+		Character(L"Linhardt",   L"24", L"4", L"5", L"10", L"6", L"5", L"7", L"5", L"9", L"3"),
+		Character(L"Caspar",     L"26", L"4", L"9", L"3",  L"5", L"6", L"8", L"6", L"2", L"4"),
+		Character(L"Bernadetta", L"25", L"4", L"8", L"5",  L"7", L"7", L"5", L"4", L"2", L"6"),
+		Character(L"Dorothea",   L"24", L"4", L"5", L"11", L"6", L"7", L"6", L"4", L"7", L"8"),
+		Character(L"Petra",	   L"25", L"4", L"9", L"3",  L"7", L"10",L"7", L"5", L"2", L"6"),
+		Character(L"Dimitri",    L"28", L"4", L"12",L"4",  L"7", L"7", L"5", L"7", L"4", L"9"),
+		Character(L"Dedue",	   L"30", L"4", L"12",L"2",  L"5", L"7", L"5", L"8", L"1", L"4"),
+		Character(L"Felix",	   L"26", L"4", L"10",L"5",  L"6", L"9", L"5", L"5", L"3", L"5"),
+		Character(L"Ashe",	   L"23", L"4", L"8", L"5",  L"8", L"9", L"6", L"5", L"6", L"5"),
+		Character(L"Sylvain",	   L"27", L"4", L"9", L"5",  L"5", L"8", L"6", L"6", L"2", L"7"),
+		Character(L"Mercedes",   L"25", L"4", L"6", L"10", L"6", L"8", L"5", L"5", L"9", L"8"),
+		Character(L"Annette",	   L"23", L"4", L"6", L"11", L"7", L"7", L"6", L"5", L"4", L"6"),
+		Character(L"Ingrid",	   L"27", L"4", L"8", L"6",  L"6", L"8", L"6", L"5", L"8", L"8"),
+		Character(L"Claude",	   L"26", L"4", L"11",L"5",  L"8", L"8", L"7", L"6", L"4", L"8"),
+		Character(L"Lorenz",	   L"28", L"4", L"8", L"7",  L"6", L"7", L"5", L"6", L"6", L"3"),
+		Character(L"Raphael",	   L"30", L"4", L"11",L"3",  L"5", L"6", L"6", L"7", L"1", L"4"),
+		Character(L"Ignatz",	   L"25", L"4", L"8", L"5",  L"7", L"8", L"8", L"4", L"6", L"4"),
+		Character(L"Lysithea",   L"22", L"4", L"4", L"11", L"7", L"7", L"4", L"3", L"4", L"5"),
+		Character(L"Marianne",   L"23", L"4", L"5", L"11", L"6", L"7", L"6", L"4", L"8", L"7"),
+		Character(L"Hilda",	   L"29", L"4", L"10",L"5",  L"5", L"8", L"6", L"6", L"3", L"7"),
+		Character(L"Leonie",	   L"26", L"4", L"9", L"5",  L"8", L"9", L"6", L"7", L"2", L"7"),
+		Character(L"Flayn",	   L"24", L"4", L"6", L"9",  L"6", L"5", L"4", L"5", L"10",L"9"),
+		Character(L"Hanneman",   L"25", L"4", L"6", L"10", L"6", L"6", L"4", L"5", L"7", L"5"),
+		Character(L"Manuela",	   L"26", L"4", L"10",L"8",  L"6", L"8", L"6", L"5", L"4", L"7"),
+		Character(L"Gilbert",	   L"30", L"4", L"9", L"4",  L"6", L"5", L"4", L"5", L"2", L"6"),
+		Character(L"Alois",	   L"28", L"4", L"9", L"4",  L"5", L"6", L"5", L"5", L"2", L"7"),
+		Character(L"Catherine",  L"27", L"4", L"8", L"5",  L"6", L"7", L"6", L"5", L"2", L"4"),
+		Character(L"Shamir",	   L"26", L"4", L"8", L"4",  L"7", L"6", L"8", L"5", L"2", L"6"),
+		Character(L"Cyril",	   L"24", L"4", L"7", L"4",  L"6", L"6", L"6", L"5", L"2", L"4"),
+		Character(L"Jeritza",	   L"30", L"4", L"8", L"6",  L"6", L"8", L"4", L"7", L"5", L"3"),
+		Character(L"Anna",	   L"26", L"4", L"7", L"7",  L"7", L"7", L"7", L"5", L"7", L"7"),
+		Character(L"Yuri",	   L"24", L"4", L"10",L"6",  L"7", L"9", L"7", L"5", L"7", L"8"),
+		Character(L"Balthus",    L"28", L"4", L"11",L"5",  L"4", L"7", L"3", L"7", L"4", L"4"),
+		Character(L"Constance",  L"23", L"4", L"5", L"11", L"6", L"6", L"4", L"3", L"4", L"6"),
+		Character(L"Hapi",	   L"26", L"4", L"6", L"11", L"8", L"6", L"4", L"4", L"7", L"4") };
 
 
 public:
-	StudentList() {}
+	CharacterList() : Character() {}
 
-	int getSize() const { return studentlist.size(); }
-	Student getStudent(UINT pos) { return studentlist[pos]; }
-	Student getStudentPtr(UINT pos) const { return studentlist[pos]; }
+	int getSize() const { return characterlist.size(); }
+	Character getCharacter(UINT pos) { return characterlist[pos]; }
+	Character getCharacterPtr(UINT pos) const { return characterlist[pos]; }
 
-	std::unique_ptr<CharacterStats> getSelStudStats(HWND& listboxcharnames) {
-		std::unique_ptr<CharacterStats> selStats = std::make_unique<CharacterStats>();
+	std::unique_ptr<std::vector<Stat>> getSelStudStats(HWND& listboxcharnames) {
+		std::unique_ptr<std::vector<Stat>> selStats = std::make_unique<std::vector<Stat>>();
 		int pos = ListBox_GetCurSel(listboxcharnames);
 		int len = ListBox_GetTextLen(listboxcharnames, pos);				//get length of text in new current selection
 		const wchar_t* buffer = new const wchar_t[len];						//buffer variable 
 		ListBox_GetText(listboxcharnames, pos, buffer);						//get text located in new current selection;
 
 		for (int i = 0; i < getSize(); i++) {
-			Student student = getStudentPtr(i);
+			Character character = getCharacterPtr(i);
 
-			std::wstring name = student.getName();
+			std::wstring name = character.getName();
 			if (name.compare(buffer) == 0) {
-				*selStats = student.getStats();
+				*selStats = character.getAllStats();
 				return selStats;
 				break;
 			}
