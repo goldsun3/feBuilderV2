@@ -6,7 +6,8 @@
 #include <memory>
 #include "resource.h"
 #include "Stat.h"
-#include "Stats.h"
+#include "StatsTemplate.h"
+#include "CharacterStats.h"
 #include "WeaponStats.h"
 #include "TotalStats.h"
 #include "Weapon.h"

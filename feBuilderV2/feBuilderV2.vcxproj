@@ -165,10 +165,11 @@
     <ClInclude Include="ListViewWeaponStats.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="StatsTemplate.h" />
     <ClInclude Include="StudentList.h" />
     <ClInclude Include="Stat.h" />
     <ClInclude Include="StatCalculator.h" />
-    <ClInclude Include="Stats.h" />
+    <ClInclude Include="CharacterStats.h" />
     <ClInclude Include="Student.h" />
     <ClInclude Include="TotalStats.h" />
     <ClInclude Include="Weapon.h" />

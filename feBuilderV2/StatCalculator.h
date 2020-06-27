@@ -1,5 +1,17 @@
 #ifndef STATCALCULATOR_H
 #define STATCALCULATOR_H
+struct statMeasure {
+	std::wstring stat = L"";
+	bool change = false;
+
+	statMeasure(std::wstring uStat, bool uChange) {
+		stat = uStat;
+		change = uChange;
+	}
+	std::wstring getStat() { return stat; }
+	bool getChange() { return change; }
+};
+
 class StatCalculator
 {
 protected:
@@ -11,7 +23,7 @@ public:
 		studentstats = Stats(L"0", L"0", L"0", L"0", L"0", L"0", L"0", L"0", L"0", L"0");
 		weaponstats = WeaponStats(L"0", L"0", L"0", L"0", L"0", L"0", L"0");
 	}
-	void setStats(Stats* stats, WeaponStats* wpnstats) {
+	void setStats(Stats* stats, WeaponStats* wpnstats, std::vector<statMeasure>* ledger) {
 		if (stats != nullptr){
 			std::vector<Stat> temp = studentstats.getAllStats();
 			temp.at(0).setStat(stats->getStatText(0));
@@ -27,6 +39,21 @@ public:
 			studentstats.updateAllStats(temp);
 		}
 
+		if (ledger != nullptr) {
+			std::vector<Stat> temp = studentstats.getAllStats();
+			temp.at(0).setStat(ledger->at(0).getStat());
+			temp.at(1).setStat(ledger->at(1).getStat());
+			temp.at(2).setStat(ledger->at(2).getStat());
+			temp.at(3).setStat(ledger->at(3).getStat());
+			temp.at(4).setStat(ledger->at(4).getStat());
+			temp.at(5).setStat(ledger->at(5).getStat());
+			temp.at(6).setStat(ledger->at(6).getStat());
+			temp.at(7).setStat(ledger->at(7).getStat());
+			temp.at(8).setStat(ledger->at(8).getStat());
+			temp.at(9).setStat(ledger->at(9).getStat());
+			studentstats.updateAllStats(temp);
+		}
+
 		if (wpnstats != nullptr) {
 			std::vector<Stat> temp = weaponstats.getAllStats();
 			temp.at(0).setStat(wpnstats->getStatText(0));
@@ -36,9 +63,6 @@ public:
 			temp.at(4).setStat(wpnstats->getStatText(4));
 			temp.at(5).setStat(wpnstats->getStatText(5));
 			temp.at(6).setStat(wpnstats->getStatText(6));
-			temp.at(7).setStat(wpnstats->getStatText(7));
-			temp.at(8).setStat(wpnstats->getStatText(8));
-			temp.at(9).setStat(wpnstats->getStatText(9));
 			weaponstats.updateAllStats(temp);
 		}
 	}

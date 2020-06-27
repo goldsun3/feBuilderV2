@@ -1,8 +1,9 @@
 #ifndef WEAPONSTATS_H
 #define WEAPONSTATS_H
 
-class WeaponStats {
+class WeaponStats : StatsTemplate{
 protected:
+	//MIGHT, HIT, CRIT, RANGE, WEIGHT, SKILLLVL, USES
 	std::vector<Stat> allStats;
 public:
 	WeaponStats() {}
@@ -28,6 +29,7 @@ public:
 
 
 	std::vector<Stat> getAllStats() { return allStats; }
+
 	std::wstring getStatText(UINT pos) {
 		std::wstring temp = allStats[pos].getStat();
 		return temp;

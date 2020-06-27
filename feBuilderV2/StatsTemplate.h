@@ -1,16 +1,12 @@
-#ifndef STATS_H
-#define STATS_H
+#ifndef STATSTEMPLATE_H
+#define STATSTEMPLATE_H
 
-class Stats {
+class StatsTemplate{
 protected:
-	//HP, MOVEMENT, STRENGTH, MAGIC, DEXTERITY, SPEED, LUCK, DEFENSE, RESISTANCE, CHARM
 	std::vector<Stat> allStats;
-	bool base = true;
-	//bool student = true;
 public:
-	Stats() {}
-
-	Stats(std::wstring uHP, std::wstring uMOV, std::wstring uSTR,
+	StatsTemplate() {}
+	StatsTemplate(std::wstring uHP, std::wstring uMOV, std::wstring uSTR,
 		std::wstring uMAG, std::wstring uDEX, std::wstring uSPD,
 		std::wstring uLCK, std::wstring uDEF, std::wstring uRES,
 		std::wstring uCHA) {
@@ -35,8 +31,11 @@ public:
 	}
 	void setBase(bool change) { base = change; }
 
+	//inline so no template<class t>
 	std::vector<Stat> getAllStats() { return allStats; }
+
 	bool getBase() { return base; }
+	
 	std::wstring getStatText(UINT pos) {
 		std::wstring temp = allStats[pos].getStat();
 		return temp;

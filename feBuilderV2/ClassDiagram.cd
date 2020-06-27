@@ -31,7 +31,7 @@
   <Class Name="ClassList" Collapsed="true">
     <Position X="5.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAACAAAAAQAIAgAAAAAAAAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAgAIAAAIAAAAAIAIAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ClassList.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -43,7 +43,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="DropDownWeaponTypes" Collapsed="true">
-    <Position X="15.75" Y="3.75" Width="1.5" />
+    <Position X="15.25" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AYAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>DropDownWeaponTypes.h</FileName>
@@ -108,7 +108,7 @@
   <Class Name="StudentList" Collapsed="true">
     <Position X="7.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAhCAAAAAAAQAAAAABAAAAAIAAAAAAAAA=</HashCode>
+      <HashCode>AAgAAAAAAIAAgAAAAAAAAAAAAAEAAEAAAIAAAAAAAAA=</HashCode>
       <FileName>StudentList.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -157,7 +157,7 @@
   <Class Name="WeaponList" Collapsed="true">
     <Position X="3.25" Y="3.5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAIAAEAAAAAAAAAAAAAAAQBAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAIAACAAAAAAAAAAAAAAAAAADAAAAAAACAAA=</HashCode>
       <FileName>WeaponList.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -169,24 +169,24 @@
     </TypeIdentifier>
   </Class>
   <Class Name="WeaponType" Collapsed="true">
-    <Position X="0.5" Y="0.5" Width="1.5" />
+    <Position X="0.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AgAAAAAAAAAAAAAAAAAAAAAgAAACAAAAAAAAAAAAAAA=</HashCode>
       <FileName>WeaponType.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WeaponTypeList" Collapsed="true">
-    <Position X="0.5" Y="3.5" Width="1.5" />
+    <Position X="0.75" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AACAAAAAAAAAAAAAIAAABAAAAAAAAAAAAAAAAAAAIAA=</HashCode>
+      <HashCode>AAAAAAAAAIAAAAAAAAAABAAgAAAAAAAAAAAgAAAAAAA=</HashCode>
       <FileName>WeaponTypeList.h</FileName>
     </TypeIdentifier>
   </Class>
   <Struct Name="statMeasure" Collapsed="true">
     <Position X="10" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAEAAAEAAAAAAAAACA=</HashCode>
-      <FileName>main.cpp</FileName>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAgAEAAAAAAAAgCA=</HashCode>
+      <FileName>StatCalculator.h</FileName>
     </TypeIdentifier>
   </Struct>
   <Font Name="Segoe UI" Size="9" />

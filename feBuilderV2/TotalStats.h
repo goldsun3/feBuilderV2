@@ -1,7 +1,6 @@
 #ifndef TOTALSTATS_H
 #define TOTALSTATS_H
-class TotalStats
-{
+class TotalStats : StatsTemplate{
 protected:
 	std::vector<Stat> allStats;
 public:

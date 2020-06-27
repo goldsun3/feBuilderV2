@@ -3,7 +3,7 @@
 // Used by feBuilderV2.rc
 //
 #define C_LVWS                          7
-#define C_LVS                           8
+#define C_LVS                           10
 #define C_LVTS							11
 #define IDI_ICON1                       101
 #define IDR_MENU1                       103
