@@ -8,7 +8,7 @@ public:
 	ClassStats() : StatsTemplate() {
 
 	}
-
+	
 	ClassStats(std::wstring uHP, std::wstring uMOV, std::wstring uSTR,
 		std::wstring uMAG, std::wstring uDEX, std::wstring uSPD,
 		std::wstring uLCK, std::wstring uDEF, std::wstring uRES,

@@ -1,17 +1,5 @@
 #ifndef STATCALCULATOR_H
 #define STATCALCULATOR_H
-struct statMeasure {
-	std::wstring stat = L"";
-	bool change = false;
-
-	statMeasure(std::wstring uStat, bool uChange) {
-		stat = uStat;
-		change = uChange;
-	}
-	std::wstring getStat() { return stat; }
-	bool getChange() { return change; }
-};
-
 class StatCalculator
 {
 protected:
@@ -23,7 +11,7 @@ public:
 		charstats = CharacterStats(L"0", L"0", L"0", L"0", L"0", L"0", L"0", L"0", L"0", L"0");
 		wpnstats = WeaponStats(L"0", L"0", L"0", L"0", L"0", L"0", L"0");
 	}
-	void setStats(std::vector<Stat>* characterstats, WeaponStats* weaponstats, std::vector<statMeasure>* ledger) {
+	void setStats(std::vector<Stat>* characterstats, WeaponStats* weaponstats, std::vector<ClassStats>* classstats) {
 		if (characterstats != nullptr){
 			std::vector<Stat> temp = *characterstats;
 			temp.at(0).setStat(characterstats->at(0).getStat());
@@ -39,18 +27,18 @@ public:
 			charstats.updateAllStats(temp);
 		}
 
-		if (ledger != nullptr) {
+		if (classstats != nullptr) {
 			std::vector<Stat> temp = *characterstats;
-			temp.at(0).setStat(ledger->at(0).getStat());
-			temp.at(1).setStat(ledger->at(1).getStat());
-			temp.at(2).setStat(ledger->at(2).getStat());
-			temp.at(3).setStat(ledger->at(3).getStat());
-			temp.at(4).setStat(ledger->at(4).getStat());
-			temp.at(5).setStat(ledger->at(5).getStat());
-			temp.at(6).setStat(ledger->at(6).getStat());
-			temp.at(7).setStat(ledger->at(7).getStat());
-			temp.at(8).setStat(ledger->at(8).getStat());
-			temp.at(9).setStat(ledger->at(9).getStat());
+			temp.at(0).setStat(classstats->at(0).getStat());
+			temp.at(1).setStat(classstats->at(1).getStat());
+			temp.at(2).setStat(classstats->at(2).getStat());
+			temp.at(3).setStat(classstats->at(3).getStat());
+			temp.at(4).setStat(classstats->at(4).getStat());
+			temp.at(5).setStat(classstats->at(5).getStat());
+			temp.at(6).setStat(classstats->at(6).getStat());
+			temp.at(7).setStat(classstats->at(7).getStat());
+			temp.at(8).setStat(classstats->at(8).getStat());
+			temp.at(9).setStat(classstats->at(9).getStat());
 			charstats.updateAllStats(temp);
 		}
 

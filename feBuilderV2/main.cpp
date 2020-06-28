@@ -3,17 +3,17 @@
 LPCWSTR g_szClassName{ L"My Window Class" };
 
 void UpdateListViewStats(HWND listviewstats, std::vector<Stat>* characterstats);
-void UpdateANDAugmentListViewStats(HWND listviewstats, std::vector<Stat>* characterstats, Class* cLass, std::vector<statMeasure>* ledger);
+void UpdateANDAugmentListViewStats(HWND listviewstats, std::vector<Stat>* characterstats, Class* cLass, std::vector<ClassStats>* classstats);
 void UpdateListViewWeaponStats(HWND listviewweaponstats, Weapon* weapon);
 bool CompareStats(std::wstring chartext, std::wstring classtext);
 void UpdateListBoxWeapons(HWND listboxweapons, HWND dropdownweapontypes, WeaponList weaponlist);
-void UpdateListViewTotalStats(HWND hwnd, std::vector<Stat>* characterstats, WeaponStats* weaponstats, std::vector<statMeasure>* ledger);
+void UpdateListViewTotalStats(HWND hwnd, std::vector<Stat>* characterstats, WeaponStats* weaponstats, std::vector<ClassStats>* classstats);
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 	std::unique_ptr<std::vector<Stat>> charstats(new std::vector<Stat>);
 	std::unique_ptr<Class> cLass(new Class);
 	std::unique_ptr<Weapon> weapon(new Weapon);
-	static std::unique_ptr<std::vector<statMeasure>> ledger (new std::vector<statMeasure>);
+	static std::unique_ptr<std::vector<ClassStats>> classstats (new std::vector<ClassStats>);
 	switch (msg) {
 
 		case WM_CREATE: {
@@ -66,7 +66,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		}
 
 		case WM_COMMAND: {
-			ledger->clear();
+			classstats->clear();
 			switch (LOWORD(wParam)) {
 				case IDC_MAIN_LBCN: {
 					switch (HIWORD(wParam)) {
@@ -100,7 +100,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 								cLass = classlist.getSelClass(hwnd, listboxclasses);
 
 								HWND listviewstats = GetDlgItem(hwnd, IDC_MAIN_LV);
-								UpdateANDAugmentListViewStats(listviewstats, charstats.get(), cLass.get(), ledger.get());
+								UpdateANDAugmentListViewStats(listviewstats, charstats.get(), cLass.get(), classstats.get());
 							}
 
 							break;
@@ -163,14 +163,15 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 						}
 
 						case CDDS_SUBITEM | CDDS_ITEMPREPAINT: {
-							if (!ledger->empty()) {
-								if (ledger->at(lpNMCustomDraw->iSubItem).getChange() == true) {
+							if (!classstats->empty()) {
+								if (classstats->at(lpNMCustomDraw->iSubItem).getBase() == true) {
 									lpNMCustomDraw->clrTextBk = COLORREF(RGB(0, 255, 0));
 								}
 								else {
 									lpNMCustomDraw->clrTextBk = COLORREF(GetSysColor(COLOR_WINDOW));
 								}
 							}
+
 							return CDRF_NEWFONT;
 						}
 					}
@@ -291,7 +292,7 @@ void UpdateListViewStats(HWND listviewstats, std::vector<Stat>* characterstats) 
 	GetDlgItem(GetParent(listviewstats), IDC_MAIN_LVTS);
 	UpdateListViewTotalStats(GetDlgItem(GetParent(listviewstats), IDC_MAIN_LVTS), characterstats, nullptr, nullptr);
 }
-void UpdateANDAugmentListViewStats(HWND listviewstats, std::vector<Stat>* characterstats, Class* cLass, std::vector<statMeasure>* ledger) {
+void UpdateANDAugmentListViewStats(HWND listviewstats, std::vector<Stat>* characterstats, Class* cLass, std::vector<ClassStats>* classstats) {
 	if (cLass->getBase() == true) {
 		LVITEM itemTemp;
 		itemTemp.mask = LVIF_TEXT;
@@ -303,7 +304,7 @@ void UpdateANDAugmentListViewStats(HWND listviewstats, std::vector<Stat>* charac
 
 		if (isBaseGrtr) {
 			std::wstring initbuffer = classstat;
-			ledger->push_back(statMeasure(initbuffer, true));
+			classstats->push_back(statMeasure(initbuffer, true));
 			LPWSTR finalbuffer = &initbuffer[0];
 			itemTemp.pszText = finalbuffer;
 			ListView_InsertItem(listviewstats, &itemTemp);
@@ -311,7 +312,7 @@ void UpdateANDAugmentListViewStats(HWND listviewstats, std::vector<Stat>* charac
 
 		else if (!isBaseGrtr) {
 			std::wstring initbuffer = characterstat;
-			ledger->push_back(statMeasure(initbuffer, false));
+			classstats->push_back(statMeasure(initbuffer, false));
 			LPWSTR finalbuffer = &initbuffer[0];
 			itemTemp.pszText = finalbuffer;
 			ListView_InsertItem(listviewstats, &itemTemp);
@@ -324,28 +325,23 @@ void UpdateANDAugmentListViewStats(HWND listviewstats, std::vector<Stat>* charac
 
 			if (isBaseGrtr) {
 				std::wstring initbuffer = classstat;
-				ledger->push_back(statMeasure(initbuffer, true));
+				classstats->push_back(statMeasure(initbuffer, true));
 				LPWSTR finalbuffer = &initbuffer[0];
 
-				//itemTemp.pszText = finalbuffer;
-				//itemTemp.iSubItem = col;
 				ListView_SetItemText(listviewstats, 0, col, finalbuffer);
 			}
 
 			else if (!isBaseGrtr) {
 				std::wstring initbuffer = characterstat;
-				ledger->push_back(statMeasure(initbuffer, false));
+				classstats->push_back(statMeasure(initbuffer, false));
 				LPWSTR finalbuffer = &initbuffer[0];
 
-				/*itemTemp.pszText = finalbuffer;
-				itemTemp.iSubItem = col;*/
 				ListView_SetItemText(listviewstats, 0, col, finalbuffer);
-
 			}
 		}
 
 		GetDlgItem(GetParent(listviewstats), IDC_MAIN_LVTS);
-		UpdateListViewTotalStats(GetDlgItem(GetParent(listviewstats), IDC_MAIN_LVTS), characterstats, nullptr, ledger);
+		UpdateListViewTotalStats(GetDlgItem(GetParent(listviewstats), IDC_MAIN_LVTS), characterstats, nullptr, classstats);
 	}
 
 	else if (cLass->getBase() == false) {
@@ -367,9 +363,6 @@ void UpdateANDAugmentListViewStats(HWND listviewstats, std::vector<Stat>* charac
 			initbuffer = characterstat + L" + " + classstat;
 			finalbuffer = &initbuffer[0];
 
-			/*itemTemp.pszText = finalbuffer;
-			itemTemp.iSubItem = col;*/
-
 			ListView_SetItemText(listviewstats, 0, col, finalbuffer);
 		}
 	}
@@ -387,9 +380,6 @@ void UpdateListViewWeaponStats(HWND listviewweaponstats, Weapon* weapon) {
 	for (int col = 0; col < C_LVWS; col++) {
 		initbuffer = weapon->getAllStats().at(col).getStat();
 		finalbuffer = &initbuffer[0];
-
-		itemTemp.pszText = finalbuffer;
-		itemTemp.iSubItem = col;
 
 		ListView_SetItemText(listviewweaponstats, 0, col, finalbuffer);
 	}
@@ -416,6 +406,7 @@ void UpdateListBoxWeapons(HWND listboxweapons, HWND dropdownweapontypes, WeaponL
 			std::wstring weaponname = weaponlist.getWeapon (index).getName ();
 			LPCTSTR wordtoinsert = &weaponname [0];
 			int error = ListBox_AddString (listboxweapons, wordtoinsert);
+
 		}
 	}
 	else{
@@ -431,9 +422,9 @@ void UpdateListBoxWeapons(HWND listboxweapons, HWND dropdownweapontypes, WeaponL
 		}
 	}
 }
-void UpdateListViewTotalStats(HWND listviewtotalstats, std::vector<Stat>* characterstats, WeaponStats* weaponstats, std::vector<statMeasure>* ledger) {
+void UpdateListViewTotalStats(HWND listviewtotalstats, std::vector<Stat>* characterstats, WeaponStats* weaponstats, std::vector<ClassStats>* classstats) {
 	static StatCalculator statcalculator;
-	statcalculator.setStats(characterstats, weaponstats, ledger);
+	statcalculator.setStats(characterstats, weaponstats, classstats);
 	statcalculator.CalculateTotalPhysicalAttack();
 	statcalculator.CalculateTotalMagicAttack();
 	statcalculator.CalculateTotalPhysicalHit();
@@ -459,10 +450,6 @@ void UpdateListViewTotalStats(HWND listviewtotalstats, std::vector<Stat>* charac
 		initbuffer = (statcalculator.getTotalStats().getAllStats())[col].getStat();
 		finalbuffer = &initbuffer [0];
 
-		itemTemp.pszText = finalbuffer;
-		itemTemp.iSubItem = col;
-
 		ListView_SetItemText(listviewtotalstats, 0, col, finalbuffer);
 	}
-
 }
