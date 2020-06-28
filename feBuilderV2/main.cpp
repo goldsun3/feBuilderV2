@@ -263,15 +263,15 @@ void UpdateListViewStats(HWND listviewstats, std::vector<Stat>* charstats) {
 	LVITEM itemTemp;
 	itemTemp.mask = LVIF_TEXT;
 	itemTemp.iItem = 0;
-	std::wstring initbuffer = charstats->at(0).getStat();
+	/*std::wstring initbuffer = charstats->at(0).getStat();
 	LPWSTR finalbuffer = &initbuffer[0];
 
-	itemTemp.pszText = finalbuffer;
-	ListView_InsertItem(listviewstats, &itemTemp);
+	itemTemp.pszText = finalbuffer;*/
+	//ListView_InsertItem(listviewstats, &itemTemp);
 
 	for (int col = 0; col < C_LVS; col++) {
-		initbuffer = charstats->at(col).getStat();
-		finalbuffer = &initbuffer[0];
+		std::wstring initbuffer = charstats->at(col).getStat();
+		LPWSTR finalbuffer = &initbuffer[0];
 
 		//itemTemp.pszText = finalbuffer;
 		//itemTemp.iSubItem = col;
@@ -288,18 +288,9 @@ void UpdateANDAugmentListViewStats(HWND listviewstats, std::vector<Stat>* charst
 		itemTemp.mask = LVIF_TEXT;
 		itemTemp.iItem = 0;
 
-		std::wstring characterstat = charstats->at(0).getStat();
-		std::wstring classstat = cLass->getAllStats().at(0).getStat();
-		charmoddedbyclassstats->push_back(CompareStats(characterstat, classstat));
-
-		std::wstring initbuffer = charmoddedbyclassstats->at(0).getStat();
-		LPWSTR finalbuffer = &initbuffer[0];
-		itemTemp.pszText = finalbuffer;
-		ListView_InsertItem(listviewstats, &itemTemp);
-
-		for (int col = 1; col < C_LVS; col++) {
-			classstat = cLass->getAllStats().at(col).getStat();
-			characterstat = charstats->at(col).getStat();
+		for (int col = 0; col < C_LVS; col++) {
+			std::wstring classstat = cLass->getAllStats().at(col).getStat();
+			std::wstring characterstat = charstats->at(col).getStat();
 			charmoddedbyclassstats->push_back(CompareStats(characterstat, classstat));
 
 			std::wstring initbuffer = charmoddedbyclassstats->at(col).getStat();
@@ -338,15 +329,15 @@ void UpdateListViewWeaponStats(HWND listviewweaponstats, Weapon* weapon) {
 	LVITEM itemTemp;
 	itemTemp.mask = LVIF_TEXT;
 	itemTemp.iItem = 0;
-	std::wstring initbuffer = weapon->getAllStats().at(0).getStat();
+	/*std::wstring initbuffer = weapon->getAllStats().at(0).getStat();
 	LPWSTR finalbuffer = &initbuffer[0];
 
-	itemTemp.pszText = finalbuffer;
-	ListView_InsertItem(listviewweaponstats, &itemTemp);
+	itemTemp.pszText = finalbuffer;*/
+	//ListView_InsertItem(listviewweaponstats, &itemTemp);
 
 	for (int col = 0; col < C_LVWS; col++) {
-		initbuffer = weapon->getAllStats().at(col).getStat();
-		finalbuffer = &initbuffer[0];
+		std::wstring initbuffer = weapon->getAllStats().at(col).getStat();
+		LPWSTR finalbuffer = &initbuffer[0];
 
 		ListView_SetItemText(listviewweaponstats, 0, col, finalbuffer);
 	}
@@ -408,15 +399,15 @@ void UpdateListViewTotalStats(HWND listviewtotalstats, std::vector<Stat>* charst
 	LVITEM itemTemp;
 	itemTemp.mask = LVIF_TEXT;
 	itemTemp.iItem = 0;
-	std::wstring initbuffer = (statcalculator.getTotalStats().getAllStats())[0].getStat();
+	/*std::wstring initbuffer = (statcalculator.getTotalStats().getAllStats())[0].getStat();
 	LPWSTR finalbuffer = &initbuffer [0];
 
-	itemTemp.pszText = finalbuffer;
-	ListView_InsertItem(listviewtotalstats, &itemTemp);
+	itemTemp.pszText = finalbuffer;*/
+	//ListView_InsertItem(listviewtotalstats, &itemTemp);
 
 	for (int col = 0; col < C_LVTS; col++) {
-		initbuffer = (statcalculator.getTotalStats().getAllStats())[col].getStat();
-		finalbuffer = &initbuffer [0];
+		std::wstring initbuffer = (statcalculator.getTotalStats().getAllStats())[col].getStat();
+		LPWSTR finalbuffer = &initbuffer [0];
 
 		ListView_SetItemText(listviewtotalstats, 0, col, finalbuffer);
 	}
