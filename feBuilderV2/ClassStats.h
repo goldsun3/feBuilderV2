@@ -32,16 +32,16 @@ public:
 		std::wstring bLCK, std::wstring bDEF, std::wstring bRES,
 		std::wstring bCHA) {
 
-		allStats.push_back(Stat(bHP));
-		allStats.push_back(Stat(bMOV));
-		allStats.push_back(Stat(bSTR));
-		allStats.push_back(Stat(bMAG));
-		allStats.push_back(Stat(bDEX));
-		allStats.push_back(Stat(bSPD));
-		allStats.push_back(Stat(bLCK));
-		allStats.push_back(Stat(bDEF));
-		allStats.push_back(Stat(bRES));
-		allStats.push_back(Stat(bCHA));
+		boosted.push_back(Stat(bHP));
+		boosted.push_back(Stat(bMOV));
+		boosted.push_back(Stat(bSTR));
+		boosted.push_back(Stat(bMAG));
+		boosted.push_back(Stat(bDEX));
+		boosted.push_back(Stat(bSPD));
+		boosted.push_back(Stat(bLCK));
+		boosted.push_back(Stat(bDEF));
+		boosted.push_back(Stat(bRES));
+		boosted.push_back(Stat(bCHA));
 	}
 
 	std::vector<Stat> getBoostedStats() { return boosted; }

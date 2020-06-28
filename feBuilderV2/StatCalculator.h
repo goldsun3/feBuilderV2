@@ -11,7 +11,7 @@ public:
 		charstats = CharacterStats(L"0", L"0", L"0", L"0", L"0", L"0", L"0", L"0", L"0", L"0");
 		wpnstats = WeaponStats(L"0", L"0", L"0", L"0", L"0", L"0", L"0");
 	}
-	void setStats(std::vector<Stat>* characterstats, WeaponStats* weaponstats, std::vector<ClassStats>* classstats) {
+	void setStats(std::vector<Stat>* characterstats, Weapon* weapon, std::vector<ClassStats>* classstats) {
 		if (characterstats != nullptr){
 			std::vector<Stat> temp = *characterstats;
 			temp.at(0).setStat(characterstats->at(0).getStat());
@@ -42,15 +42,15 @@ public:
 			charstats.updateAllStats(temp);
 		}
 
-		if (weaponstats != nullptr) {
-			std::vector<Stat> temp = weaponstats->getAllStats();
-			temp.at(0).setStat(weaponstats->getAllStats().at(0).getStat());
-			temp.at(1).setStat(weaponstats->getAllStats().at(1).getStat());
-			temp.at(2).setStat(weaponstats->getAllStats().at(2).getStat());
-			temp.at(3).setStat(weaponstats->getAllStats().at(3).getStat());
-			temp.at(4).setStat(weaponstats->getAllStats().at(4).getStat());
-			temp.at(5).setStat(weaponstats->getAllStats().at(5).getStat());
-			temp.at(6).setStat(weaponstats->getAllStats().at(6).getStat());
+		if (weapon != nullptr) {
+			std::vector<Stat> temp = weapon->getAllStats();
+			temp.at(0).setStat(weapon->getAllStats().at(0).getStat());
+			temp.at(1).setStat(weapon->getAllStats().at(1).getStat());
+			temp.at(2).setStat(weapon->getAllStats().at(2).getStat());
+			temp.at(3).setStat(weapon->getAllStats().at(3).getStat());
+			temp.at(4).setStat(weapon->getAllStats().at(4).getStat());
+			temp.at(5).setStat(weapon->getAllStats().at(5).getStat());
+			temp.at(6).setStat(weapon->getAllStats().at(6).getStat());
 			wpnstats.updateAllStats(temp);
 		}
 	}
