@@ -169,10 +169,9 @@ public:
 					selClass->setBase(false);
 					return selClass;
 				}
-
-				break;
 			}
 		}
+		return selClass;
 	}
 };
 

@@ -20,8 +20,9 @@ public:
 		if (hButton == NULL) {
 			MessageBox(hwnd, L"Could not create button.", L"Error!", MB_OK | MB_ICONERROR);
 		}
-
-		Button_SetCheck(hButton, BST_CHECKED);
+		else {
+			Button_SetCheck(hButton, BST_CHECKED);
+		}
 	}
 
 	HWND GetHandle() { return hButton; }

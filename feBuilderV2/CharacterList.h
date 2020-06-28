@@ -64,9 +64,9 @@ public:
 			if (name.compare(buffer) == 0) {
 				*selStats = character.getAllStats();
 				return selStats;
-				break;
 			}
 		}
+		return selStats;
 	}
 };
 

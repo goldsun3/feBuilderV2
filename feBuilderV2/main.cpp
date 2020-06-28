@@ -172,8 +172,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		}
 
 		case WM_SIZE: {
-			HWND hListBox;//
-			RECT rcClient;//
+			RECT rcClient;
 
 			GetClientRect(hwnd, &rcClient);
 
@@ -199,8 +198,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 	return TRUE;
 }
 
-int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
-	LPSTR lpCmdLine, int nCmdShow)
+int WINAPI WinMain(_In_ HINSTANCE hInstance,
+					_In_opt_ HINSTANCE hPrevInstance,
+					_In_ LPSTR lpCmdLine,
+					_In_ int nShowCmd)
 {
 	WNDCLASSEX wc;
 	HWND hwnd;
@@ -245,9 +246,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		MessageBox(NULL, L"Windows registration failed!", L"Error!",
 			MB_ICONEXCLAMATION | MB_OK);
 	}
-
-	ShowWindow(hwnd, nCmdShow);
-	UpdateWindow(hwnd);
+	else {
+		ShowWindow(hwnd, nShowCmd);
+		UpdateWindow(hwnd);
+	}
 
 	while (GetMessage(&Msg, NULL, 0, 0) > 0) {
 		TranslateMessage(&Msg);

@@ -2,8 +2,8 @@
 #define LISTVIEWSTATS_H
 class ListViewStats : public ListViewTemplate{
 protected:
-	LVCOLUMN lvc;
-	LVITEM lvi;
+	LVCOLUMN lvc    { LVCF_FMT | LVCF_WIDTH | LVCF_TEXT | LVCF_SUBITEM };
+	LVITEM lvi		{ LVIF_TEXT };
 	std::vector<std::wstring> initStats{ L"0", L"0", L"0", L"0", L"0", L"0", L"0", L"0", L"0", L"0" };
 public:
 	virtual void Construct(HWND hwnd) {
@@ -39,7 +39,7 @@ public:
 				GetModuleHandle(NULL),
 				IDS_HP + col,
 				buffer,
-				sizeof(buffer));
+				(sizeof(buffer) / 2));
 
 			if (ListView_InsertColumn(hListView, col, &lvc) == -1) {
 				MessageBox(hwnd, L"Could not create list box.", L"Error!", MB_OK | MB_ICONERROR);

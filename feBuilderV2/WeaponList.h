@@ -168,6 +168,7 @@ public:
 				return selWeapon;
 			}
 		}
+		return selWeapon;
 	}
 };
 

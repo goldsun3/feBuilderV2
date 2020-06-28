@@ -20,8 +20,9 @@ public:
 		if (hDropDown == NULL) {
 			MessageBox(hwnd, L"Could not create list box.", L"Error!", MB_OK | MB_ICONERROR);
 		}
-
-		ComboBox_AddString (hDropDown, L"ALL");
+		else {
+			ComboBox_AddString(hDropDown, L"ALL");
+		}
 	}
 
 	void SetWeaponTypes(WeaponTypeList weapontypelist) {
