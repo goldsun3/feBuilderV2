@@ -151,7 +151,7 @@ public:
 		return weaponlist[pos];
 	}
 
-	std::unique_ptr<Weapon> getSelWeapon(HWND& listboxweapons) const {
+	std::unique_ptr<Weapon> getSelWeapon(HWND listboxweapons) {
 		std::unique_ptr<Weapon> selWeapon = std::make_unique<Weapon>();
 		int pos = ListBox_GetCurSel(listboxweapons);
 		int len = ListBox_GetTextLen(listboxweapons, pos);				//get length of text in new current selection

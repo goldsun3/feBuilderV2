@@ -11,46 +11,19 @@ public:
 		charstats = CharacterStats(L"0", L"0", L"0", L"0", L"0", L"0", L"0", L"0", L"0", L"0");
 		wpnstats = WeaponStats(L"0", L"0", L"0", L"0", L"0", L"0", L"0");
 	}
-	void setStats(std::vector<Stat>* characterstats, Weapon* weapon, std::vector<ClassStats>* classstats) {
+	void setStats(std::vector<Stat>* characterstats, Weapon* weapon, std::vector<Stat>* charmoddedbyclassstats) {
 		if (characterstats != nullptr){
 			std::vector<Stat> temp = *characterstats;
-			temp.at(0).setStat(characterstats->at(0).getStat());
-			temp.at(1).setStat(characterstats->at(1).getStat());
-			temp.at(2).setStat(characterstats->at(2).getStat());
-			temp.at(3).setStat(characterstats->at(3).getStat());
-			temp.at(4).setStat(characterstats->at(4).getStat());
-			temp.at(5).setStat(characterstats->at(5).getStat());
-			temp.at(6).setStat(characterstats->at(6).getStat());
-			temp.at(7).setStat(characterstats->at(7).getStat());
-			temp.at(8).setStat(characterstats->at(8).getStat());
-			temp.at(9).setStat(characterstats->at(9).getStat());
 			charstats.updateAllStats(temp);
 		}
 
-		if (classstats != nullptr) {
-			std::vector<Stat> temp = *characterstats;
-			temp.at(0).setStat(classstats->at(0).getStat());
-			temp.at(1).setStat(classstats->at(1).getStat());
-			temp.at(2).setStat(classstats->at(2).getStat());
-			temp.at(3).setStat(classstats->at(3).getStat());
-			temp.at(4).setStat(classstats->at(4).getStat());
-			temp.at(5).setStat(classstats->at(5).getStat());
-			temp.at(6).setStat(classstats->at(6).getStat());
-			temp.at(7).setStat(classstats->at(7).getStat());
-			temp.at(8).setStat(classstats->at(8).getStat());
-			temp.at(9).setStat(classstats->at(9).getStat());
+		if (charmoddedbyclassstats != nullptr) {
+			std::vector<Stat> temp = *charmoddedbyclassstats;
 			charstats.updateAllStats(temp);
 		}
 
 		if (weapon != nullptr) {
-			std::vector<Stat> temp = weapon->getAllStats();
-			temp.at(0).setStat(weapon->getAllStats().at(0).getStat());
-			temp.at(1).setStat(weapon->getAllStats().at(1).getStat());
-			temp.at(2).setStat(weapon->getAllStats().at(2).getStat());
-			temp.at(3).setStat(weapon->getAllStats().at(3).getStat());
-			temp.at(4).setStat(weapon->getAllStats().at(4).getStat());
-			temp.at(5).setStat(weapon->getAllStats().at(5).getStat());
-			temp.at(6).setStat(weapon->getAllStats().at(6).getStat());
+			std::vector<Stat> temp = weapon->getAllStats();					
 			wpnstats.updateAllStats(temp);
 		}
 	}

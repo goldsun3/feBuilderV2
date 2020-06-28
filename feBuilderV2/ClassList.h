@@ -146,7 +146,7 @@ public:
 		return classlist[pos];
 	}
 
-	std::unique_ptr<Class> getSelClass(HWND hwnd, HWND& listboxclasses) const {
+	std::unique_ptr<Class> getSelClass(HWND hwnd, HWND listboxclasses) {
 		std::unique_ptr<Class> selClass = std::make_unique<Class>();
 		int pos = ListBox_GetCurSel(listboxclasses);
 		int len = ListBox_GetTextLen(listboxclasses, pos);				//get length of text in new current selection

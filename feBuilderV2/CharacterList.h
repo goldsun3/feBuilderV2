@@ -50,7 +50,7 @@ public:
 	Character getCharacter(UINT pos) { return characterlist[pos]; }
 	Character getCharacterPtr(UINT pos) const { return characterlist[pos]; }
 
-	std::unique_ptr<std::vector<Stat>> getSelStudStats(HWND& listboxcharnames) {
+	std::unique_ptr<std::vector<Stat>> getSelStudStats(HWND listboxcharnames) {
 		std::unique_ptr<std::vector<Stat>> selStats = std::make_unique<std::vector<Stat>>();
 		int pos = ListBox_GetCurSel(listboxcharnames);
 		int len = ListBox_GetTextLen(listboxcharnames, pos);				//get length of text in new current selection
