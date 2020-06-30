@@ -10,10 +10,10 @@ void UpdateListBoxWeapons			(HWND listboxweapons, HWND dropdownweapontypes, Weap
 void UpdateListViewTotalStats		(HWND hwnd, std::vector<Stat>* charstats, Weapon* weapon, std::vector<Stat>* charmoddedbyclassstats);
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
-	std::unique_ptr<Class>						cLass(new Class);
-	std::unique_ptr<Weapon>						weapon(new Weapon);
-	static std::unique_ptr<std::vector<Stat>>			charstats(new std::vector<Stat>);
-	static std::unique_ptr<std::vector<Stat>>	charmoddedbyclassstats(new std::vector<Stat>);
+	std::unique_ptr<Class>	cLass = std::make_unique<Class>();
+	std::unique_ptr<Weapon>	weapon = std::make_unique<Weapon>();
+	static std::unique_ptr<std::vector<Stat>> charstats = std::make_unique<std::vector<Stat>>();
+	static std::unique_ptr<std::vector<Stat>> charmoddedbyclassstats = std::make_unique<std::vector<Stat>>();
 
 	switch (msg) {
 
@@ -203,6 +203,9 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance,
 					_In_ LPSTR lpCmdLine,
 					_In_ int nShowCmd)
 {
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+	_CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_DEBUG);
+
 	WNDCLASSEX wc;
 	HWND hwnd;
 	MSG Msg;

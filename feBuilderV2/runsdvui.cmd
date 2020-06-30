@@ -1,0 +1,2 @@
+cd /d "C:\Users\these\Desktop\feBuilderV2\feBuilderV2" &msbuild "feBuilderV2.vcxproj" /t:sdvViewer /p:configuration="Debug" /p:platform="Win32" /p:SolutionDir="C:\Users\these\Desktop\feBuilderV2" 
+exit %errorlevel% 

@@ -131,46 +131,40 @@ protected:
 
 
 	};
-
 public:
 	ClassList() : Class() {}
-	int getSize() const {
-		return classlist.size();
-	}
 
-	Class getClass(UINT pos) {
-		return classlist[pos];
-	}
-
-	Class getClassPtr(UINT pos) const {
-		return classlist[pos];
-	}
+	int getSize() const { return classlist.size(); }
+	Class getClass(UINT pos) { return classlist[pos]; }
+	Class getClassPtr(UINT pos) const { return classlist[pos]; }
 
 	std::unique_ptr<Class> getSelClass(HWND hwnd, HWND listboxclasses) {
 		std::unique_ptr<Class> selClass = std::make_unique<Class>();
 		int pos = ListBox_GetCurSel(listboxclasses);
 		int len = ListBox_GetTextLen(listboxclasses, pos);				//get length of text in new current selection
-		const wchar_t* buffer = new const wchar_t[len];						//buffer variable 
+		const wchar_t* buffer = new const wchar_t[++len];						//buffer variable 
 		ListBox_GetText(listboxclasses, pos, buffer);						//get text located in new current selection
 
 		for (int i = 0; i < getSize(); i++) {
 			Class cLass = getClassPtr(i);
 
 			std::wstring name = cLass.getName();
-
 			if (name.compare(buffer) == 0) {
 				if (Button_GetCheck(GetDlgItem(hwnd, IDC_MAIN_BCBAS)) == BST_CHECKED) {
 					*selClass = cLass;
+					delete[] buffer;
 					return selClass;
 				}
 
 				if (Button_GetCheck(GetDlgItem(hwnd, IDC_MAIN_BCBOS)) == BST_CHECKED) {
 					*selClass = cLass;
 					selClass->setBase(false);
+					delete[] buffer;
 					return selClass;
 				}
 			}
 		}
+
 		return selClass;
 	}
 };

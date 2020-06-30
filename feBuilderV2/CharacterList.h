@@ -41,8 +41,6 @@ protected:
 		Character(L"Balthus",    L"28", L"4", L"11",L"5",  L"4", L"7", L"3", L"7", L"4", L"4"),
 		Character(L"Constance",  L"23", L"4", L"5", L"11", L"6", L"6", L"4", L"3", L"4", L"6"),
 		Character(L"Hapi",	   L"26", L"4", L"6", L"11", L"8", L"6", L"4", L"4", L"7", L"4") };
-
-
 public:
 	CharacterList() : Character() {}
 
@@ -53,9 +51,9 @@ public:
 	std::unique_ptr<std::vector<Stat>> getSelStudStats(HWND listboxcharnames) {
 		std::unique_ptr<std::vector<Stat>> selStats = std::make_unique<std::vector<Stat>>();
 		int pos = ListBox_GetCurSel(listboxcharnames);
-		int len = ListBox_GetTextLen(listboxcharnames, pos);				//get length of text in new current selection
-		const wchar_t* buffer = new const wchar_t[len];						//buffer variable 
-		ListBox_GetText(listboxcharnames, pos, buffer);						//get text located in new current selection;
+		int len = ListBox_GetTextLen(listboxcharnames, pos);
+		const wchar_t* buffer = new const wchar_t[++len];
+		ListBox_GetText(listboxcharnames, pos, buffer);
 
 		for (int i = 0; i < getSize(); i++) {
 			Character character = getCharacterPtr(i);
@@ -63,9 +61,11 @@ public:
 			std::wstring name = character.getName();
 			if (name.compare(buffer) == 0) {
 				*selStats = character.getAllStats();
+				delete[] buffer;
 				return selStats;
 			}
 		}
+
 		return selStats;
 	}
 };

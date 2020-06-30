@@ -137,37 +137,31 @@ protected:
 		Weapon (L"Rescue",               L"White Magic", L"0",  L"0",   L"0",  L"0",   L"0",  L"B", L"3"),
 		Weapon (L"Warp",                 L"White Magic", L"0",  L"0",   L"0",  L"0",   L"0",  L"B", L"1"),
 	};		
-
 public:
-	int getSize () const {
-		return weaponlist.size();
-	}
+	WeaponList() : Weapon() {}
 
-	Weapon getWeapon(UINT pos) {
-		return weaponlist[pos];
-	}
-
-	Weapon getWeaponPtr(UINT pos) const {
-		return weaponlist[pos];
-	}
+	int getSize() const { return weaponlist.size(); }
+	Weapon getWeapon(UINT pos) { return weaponlist[pos]; }
+	Weapon getWeaponPtr(UINT pos) const { return weaponlist[pos]; }
 
 	std::unique_ptr<Weapon> getSelWeapon(HWND listboxweapons) {
 		std::unique_ptr<Weapon> selWeapon = std::make_unique<Weapon>();
 		int pos = ListBox_GetCurSel(listboxweapons);
 		int len = ListBox_GetTextLen(listboxweapons, pos);				//get length of text in new current selection
-		const wchar_t* buffer = new const wchar_t[len];						//buffer variable 
+		const wchar_t* buffer = new const wchar_t[++len];						//buffer variable 
 		ListBox_GetText(listboxweapons, pos, buffer);						//get text located in new current selection
 
 		for (int i = 0; i < getSize(); i++) {
 			Weapon weapon = getWeaponPtr(i);
 
 			std::wstring name = weapon.getName();
-
 			if (name.compare(buffer) == 0) {
 				*selWeapon = weapon;
+				delete[] buffer;
 				return selWeapon;
 			}
 		}
+
 		return selWeapon;
 	}
 };
